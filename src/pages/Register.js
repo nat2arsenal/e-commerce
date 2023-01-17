@@ -1,49 +1,139 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useContext } from 'react'; // S54 ACTIVITY
+
+import {Navigate} from 'react-router-dom'; // S54 ACTIVITY
+import {useNavigate} from 'react-router-dom'; // S55 ACTIVITY
+
+import Swal from 'sweetalert2'; // S54 ACTIVITY
+
+import UserContext from '../UserContext'; // S54 ACTIVITY
+
 import { Form, Button } from 'react-bootstrap';
 
 export default function Register() {
 
-    const [firstName, setFirstName] = useState(""); 
-    const [lastName, setLastName] = useState(""); 
-    const [email, setEmail] = useState("");
-    const [mobileNo, setMobileNo] = useState(""); 
-    const [password1, setPassword1] = useState("");
-    const [password2, setPassword2] = useState("");
+    // const {user, setUser} = useContext(UserContext); // S54 ACTIVITY
 
+    const {user} = useContext(UserContext); // S55 ACTIVITY
+
+    const navigate = useNavigate(); // S55 ACTIVITY
+
+
+    // State hooks to store the values of the input fields
+    const [firstName, setFirstName] = useState(""); // S55 ACTIVITY
+    const [lastName, setLastName] = useState(""); // S55 ACTIVITY
+    const [email, setEmail] = useState("");
+    const [mobileNumber, setMobileNumber] = useState(""); // S55 ACTIVITY
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
+    // State to determine wether submit button is enabled or not
     const [isActive, setIsActive] = useState(false);
 
+    // console.log(email);
+    // console.log(password);
+    // console.log(password2);
 
+    // Function to simulate redirection via form submission
     function registerUser(e) {
         // prevents page redirection via form submission
         e.preventDefault()
 
-        setFirstName("");
-        setLastName("")
-        setEmail("");
-        setMobileNo("");
-        setPassword1("");
-        setPassword2("");
+        // S55 ACTIVITY
+        fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
 
-        alert('Thank you for registering!');
+            if (data === true) {
+
+                Swal.fire({
+                    title: "Duplicate Email Found",
+                    icon: "error",
+                    text: "Kindly provide another email to complete registration."
+                })
+            } else {
+
+                fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        mobileNumber: mobileNumber,
+                        password: password
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+
+                    if(data === true) {
+                    // Clear input fields
+                    setFirstName("");
+                    setLastName("")
+                    setEmail("");
+                    setMobileNumber("");
+                    setPassword("");
+                    setPassword2("");
+
+                    Swal.fire({
+                            title: "Registration Successful",
+                            icon: "success",
+                            text: "Welcome to Zuitt!"
+                        })
+
+                        navigate("/login");
+
+                    } else {
+
+                        Swal.fire({
+                            title: "Something went wrong",
+                            icon: "error",
+                            text: "Please, try again."
+                        })
+                    }
+                })
+            }
+        })
+
+        //alert('Thank you for registering!');
     }
 
-
+    // S55 ACTIVITY
     useEffect(() => {
-        if((email !== '' && password1 !== '' && password2 !== '') && (password1 === password2)){
-            setIsActive(true);
-        } else {
-            setIsActive(false);
-        }
+        /*
+        MINI ACTIVITY
+        Create a validation to enable the submit button when all fields are populated and both passwords match.
+        7:45 PM
+        */
 
-    }, [email, password1, password2])
+            // Validation to enable the submit button when all fields are populated and both passwords match.
+            if((email !== '' && password !== '' && password2 !== '') && (password === password2)){
+                setIsActive(true);
+            } else {
+                setIsActive(false);
+            }
+
+        }, [email, password, password2])
 
 
     return (
-
-
+        (user.id !== null) ? // S54 ACTIVITY
+        <Navigate to ="/" /> // S54 ACTIVITY
+        : // S54 ACTIVITY
         <Form onSubmit={(e) => registerUser(e)}>
-            <h1 className="text-center mb-3 mt-3">Registration form</h1>
 
+            {/*S55 ACTIVITY*/}
             <Form.Group className="mb-3" controlId="firstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control 
@@ -78,21 +168,21 @@ export default function Register() {
           </Form.Group>
 
           {/*S55 ACTIVITY*/}
-          <Form.Group className="mb-3" controlId="mobileNo">
+          <Form.Group className="mb-3" controlId="mobileNumber">
             <Form.Label>Mobile Number</Form.Label>
             <Form.Control 
                 type="text"
-                value={mobileNo}
-                onChange={(e) => {setMobileNo(e.target.value)}}
+                value={mobileNumber}
+                onChange={(e) => {setMobileNumber(e.target.value)}}
                 placeholder="0999999999" />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="password1">
+          <Form.Group className="mb-3" controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control 
                 type="password" 
-                value={password1}
-                onChange={(e) => {setPassword1(e.target.value)}}
+                value={password}
+                onChange={(e) => {setPassword(e.target.value)}}
                 placeholder="Enter Your Password" />
           </Form.Group>
 
@@ -109,12 +199,13 @@ export default function Register() {
                      Submit
                     </Button>
                     :
-                    <Button variant="dark grey" type="submit" id="submitBtn" disabled>
+                    <Button variant="primary" type="submit" id="submitBtn" disabled>
                       Submit
                     </Button>
           }
-            
-        </Form>
+         
+        </Form> 
     )
 
 }
+ 
