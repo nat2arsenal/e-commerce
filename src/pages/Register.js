@@ -1,13 +1,13 @@
 import { useState, useEffect,useContext } from 'react'; // S54 ACTIVITY
 
-import {Navigate} from 'react-router-dom'; // S54 ACTIVITY
-import {useNavigate} from 'react-router-dom'; // S55 ACTIVITY
+import {useNavigate, Navigate, Link} from 'react-router-dom'; // S54 ACTIVITY
+
 
 import Swal from 'sweetalert2'; // S54 ACTIVITY
 
 import UserContext from '../UserContext'; // S54 ACTIVITY
 
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 export default function Register() {
 
@@ -131,80 +131,90 @@ export default function Register() {
         (user.id !== null) ? // S54 ACTIVITY
         <Navigate to ="/" /> // S54 ACTIVITY
         : // S54 ACTIVITY
-        <Form onSubmit={(e) => registerUser(e)}>
+        <div className="form-container">
+        <Row>
+            <Col>
+                <h2 id="register">Register</h2>
+                <Form className="register-form" onSubmit={(e) => registerUser(e)}>
 
-            {/*S55 ACTIVITY*/}
-            <Form.Group className="mb-3" controlId="firstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control 
-                type="text"
-                value={firstName}
-                onChange={(e) => {setFirstName(e.target.value)}}
-                placeholder="Enter your First Name" 
-                required
-                />
-          </Form.Group>
+                    {/*S55 ACTIVITY*/}
+                    <Form.Group className="mb-3" controlId="firstName">
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control 
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => {setFirstName(e.target.value)}}
+                        placeholder="Enter your First Name" 
+                        required
+                        />
+                  </Form.Group>
 
-          {/*S55 ACTIVITY*/}
-          <Form.Group className="mb-3" controlId="lastName">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control 
-                type="text"
-                value={lastName}
-                onChange={(e) => {setLastName(e.target.value)}}
-                placeholder="Enter your Last Name" />
-          </Form.Group>
+                  {/*S55 ACTIVITY*/}
+                  <Form.Group className="mb-3" controlId="lastName">
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control 
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => {setLastName(e.target.value)}}
+                        placeholder="Enter your Last Name" />
+                  </Form.Group>
 
-          <Form.Group className="mb-3" controlId="userEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control 
-                type="email"
-                value={email}
-                onChange={(e) => {setEmail(e.target.value)}}
-                placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+                  <Form.Group className="mb-3" controlId="userEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control 
+                        type="email"
+                        value={email}
+                        onChange={(e) => {setEmail(e.target.value)}}
+                        placeholder="Enter email" />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
 
-          {/*S55 ACTIVITY*/}
-          <Form.Group className="mb-3" controlId="mobileNumber">
-            <Form.Label>Mobile Number</Form.Label>
-            <Form.Control 
-                type="text"
-                value={mobileNumber}
-                onChange={(e) => {setMobileNumber(e.target.value)}}
-                placeholder="0999999999" />
-          </Form.Group>
+                  {/*S55 ACTIVITY*/}
+                  <Form.Group className="mb-3" controlId="mobileNumber">
+                    <Form.Label>Mobile Number</Form.Label>
+                    <Form.Control 
+                        type="text"
+                        value={mobileNumber}
+                        onChange={(e) => {setMobileNumber(e.target.value)}}
+                        placeholder="0999999999" />
+                  </Form.Group>
 
-          <Form.Group className="mb-3" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control 
-                type="password" 
-                value={password}
-                onChange={(e) => {setPassword(e.target.value)}}
-                placeholder="Enter Your Password" />
-          </Form.Group>
+                  <Form.Group className="mb-3" controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        value={password}
+                        onChange={(e) => {setPassword(e.target.value)}}
+                        placeholder="Enter Your Password" />
+                  </Form.Group>
 
-          <Form.Group className="mb-3" controlId="password2">
-            <Form.Label>Verify Password</Form.Label>
-            <Form.Control 
-                type="password" 
-                value={password2}
-                onChange={(e) => {setPassword2(e.target.value)}}
-                placeholder="Verify Your Password" />
-          </Form.Group>
-          { isActive ?
-                    <Button variant="primary" type="submit" id="submitBtn">
-                     Submit
-                    </Button>
-                    :
-                    <Button variant="primary" type="submit" id="submitBtn" disabled>
-                      Submit
-                    </Button>
-          }
-         
-        </Form> 
+                  <Form.Group className="mb-3" controlId="password2">
+                    <Form.Label>Verify Password</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        value={password2}
+                        onChange={(e) => {setPassword2(e.target.value)}}
+                        placeholder="Verify Your Password" />
+                  </Form.Group>
+                  { isActive ?
+                            <Button variant="primary" type="submit" id="submitBtn">
+                                Submit
+                            </Button>
+                            : 
+                            <Button variant="dark grey" type="submit" id="submitBtn" disabled>
+                                Submit
+                            </Button>
+                  }
+
+                  <p className="mt-3">Already have an account? Login <Link style={{textDecoration: 'none'}} to="/login">
+                   here</Link></p>
+                 
+                </Form> 
+            </Col>
+        </Row>
+        </div>
     )
 
 }

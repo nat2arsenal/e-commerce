@@ -1,5 +1,5 @@
 import './App.css';
-import {Container} from 'react-bootstrap';
+// import {Container} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
@@ -54,18 +54,24 @@ export default function App() {
   return (
     <>
     <UserProvider value={{user, setUser, unsetUser}}>
+    <div className="nav-bar">
+      <h2>Diari ibutang ang navbar</h2>
+    </div>
+    <div className="page">
       <Router>
-        <Container>
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/admin" element={<AdminPage/>} />
-            <Route path="/logout" element={<Logout/>} />
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/admin" element={<AdminPage/>} />
+          <Route path="/logout" element={<Logout/>} />
 
-          </Routes>
-        </Container>
+        </Routes>
       </Router>
+    </div>
+    <div className="footer">
+      <h2>Diari ibutang ang footer</h2>
+    </div>
     </UserProvider>
     </>
   );

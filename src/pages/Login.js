@@ -3,7 +3,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import {useState, useEffect, useContext} from 'react';
 
 // import {useNavigate} from 'react-router-dom';
-import {Navigate} from 'react-router-dom';
+import {Navigate, Link} from 'react-router-dom';
 
 import UserContext from '../UserContext';
 
@@ -120,10 +120,11 @@ export default function Login() {
         (user.id !== null) ?
         <Navigate to="/" />
         :
+        <div className="form-container">
         <Row>
-            <Col className="p-5">
-                <h1>Login</h1>
-                <Form onSubmit={(e) => authenticate(e)}>
+            <Col>
+                <h2 id="login">Login</h2>
+                <Form className="login-form" onSubmit={(e) => authenticate(e)}>
                     <Form.Group controlId="userEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
@@ -150,17 +151,22 @@ export default function Login() {
                     </Form.Group>
 
                         { isActive ?
-                            <Button variant="primary" type="submit" id="submitBtn">
+                            <Button className="mt-3" variant="primary" type="submit" id="submitBtn">
                                 Submit
                             </Button>
                             : 
-                            <Button variant="dark grey" type="submit" id="submitBtn" disabled>
+                            <Button className="mt-3" variant="dark grey" type="submit" id="submitBtn" disabled>
                                 Submit
                             </Button>
                         }
+
+                    <p className="mt-3">Don't have an account? Register <Link style={{textDecoration: 'none'}} to="/register">
+                     here</Link></p>
+
                 </Form>
             </Col>
         </Row>
+        </div>
         
     )
 

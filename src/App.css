@@ -3,8 +3,46 @@
   margin:  0;
   padding:  0;
   box-sizing:  border-box;
+  justify-content: center;
+}
+.nav-bar{
+  min-height: 5vh;
+  background: white;
+  text-align: center;
 }
 
-.cardHighlight {
-  min-height: 100%;
+.footer{
+  min-height: 15vh;
+  background: white;
+  text-align: center;
 }
+
+.page {
+  display: flex;
+  min-height: 80vh;
+  align-items: center;
+  justify-content: center;
+  background: grey;
+}
+
+.form-container, .login-form, .register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+   padding: 2rem;
+   background-color: white;
+   position: relative;
+   border-radius: 1em;
+   box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+   align-items: center;
+   justify-content: space-around;
+}
+
+#login, #register {
+  text-align: center;
+}
+
+
+
