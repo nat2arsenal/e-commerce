@@ -132,11 +132,11 @@ export default function Register() {
         <Navigate to ="/" /> // S54 ACTIVITY
         : // S54 ACTIVITY
         <div className="form-container">
-        <Row>
-            <Col>
+        <Col xs={12} md={4}>
+            <Row className="form-col">
                 <h2 id="register">Register</h2>
                 <Form className="register-form" onSubmit={(e) => registerUser(e)}>
-
+                
                     {/*S55 ACTIVITY*/}
                     <Form.Group className="mb-3" controlId="firstName">
                     <Form.Label>First Name</Form.Label>
@@ -166,9 +166,6 @@ export default function Register() {
                         value={email}
                         onChange={(e) => {setEmail(e.target.value)}}
                         placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                      We'll never share your email with anyone else.
-                    </Form.Text>
                   </Form.Group>
 
                   {/*S55 ACTIVITY*/}
@@ -208,12 +205,12 @@ export default function Register() {
                             </Button>
                   }
 
-                  <p className="mt-3">Already have an account? Login <Link style={{textDecoration: 'none'}} to="/login">
+                  <p id="register2" className="mt-3">Already have an account? Login <Link style={{textDecoration: 'none'}} to="/login">
                    here</Link></p>
                  
                 </Form> 
-            </Col>
-        </Row>
+            </Row>
+        </Col>
         </div>
     )
 

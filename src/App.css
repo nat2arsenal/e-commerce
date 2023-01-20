@@ -1,10 +1,11 @@
 
-*{
-  margin:  0;
-  padding:  0;
-  box-sizing:  border-box;
-  justify-content: center;
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 .nav-bar{
   min-height: 5vh;
   background: white;
@@ -17,12 +18,12 @@
   text-align: center;
 }
 
-.page {
+.home-space {
   display: flex;
   min-height: 80vh;
   align-items: center;
   justify-content: center;
-  background: grey;
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 }
 
 .form-container, .login-form, .register-form {
@@ -30,19 +31,119 @@
   flex-direction: column;
 }
 
-.form-container {
+.form-container  {
    padding: 2rem;
-   background-color: white;
+   background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
    position: relative;
-   border-radius: 1em;
-   box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+   /*border-radius: 1em;*/
+   /*box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);*/
    align-items: center;
    justify-content: space-around;
+   height: 100vh;
 }
 
-#login, #register {
+.form-col {
+  color: white;
+  padding:  2rem;
+  border-radius: 1em;
+  /*background-color: #20c997;*/
+  background-color:  #2F4050;
+  box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+}
+
+
+#login, #register, #register2 {
   text-align: center;
 }
 
 
+.Admin {
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+}
 
+.Sidebar {
+  height: 100%;
+  width: 20%;
+  background-color: #2F4050;
+}
+
+.SidebarList {
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.SidebarList .row {
+  height: 5rem;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.SidebarList .row:hover {
+  cursor: pointer;
+  background-color: #293846;
+}
+
+.SidebarList #active {
+  background-color: #293846;
+}
+
+.row #title {
+  flex: 70%;
+  display: grid;
+  place-items: left;
+}
+
+.row #icon {
+  flex: 30%;
+  display: grid;
+  border-style: none;
+  /*place-items: center;*/
+}
+
+.Orders, .ProductsPage, .Users {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+/*.row #icon{
+  background-color: #2F4050;
+}*/
+
+/*.SidebarList .row #dropdown-basic {
+  cursor: pointer;
+  background-color: #2F4050;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-style: none;
+}
+
+.SidebarList .row #dropdown-basic:hover {
+  cursor: pointer;
+  background-color: #293846;
+}
+
+.SidebarList .row #dropdown-icon {
+  cursor: pointer;
+  background-color: #2F4050;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-style: none;
+}
+
+.SidebarList .row #dropdown-icon:hover {
+ cursor: pointer;
+ background-color: #293846;
+}*/

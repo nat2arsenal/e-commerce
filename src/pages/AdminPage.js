@@ -59,10 +59,8 @@ export default function Admin() {
     }
 
     return (
-
         <Row>
         	<Col className="p-5 text-center">
-
                 <Form>
                     <Form.Group controlId="productName">
                         <Form.Label>Product Name</Form.Label>
@@ -74,7 +72,6 @@ export default function Admin() {
                             required
                         />
                     </Form.Group>
-
                     <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control 
@@ -85,7 +82,6 @@ export default function Admin() {
                             required
                         />
                     </Form.Group>
-
                     <Form.Group controlId="price">
                         <Form.Label>Price</Form.Label>
                         <Form.Control 
@@ -96,7 +92,6 @@ export default function Admin() {
                             required
                         />
                     </Form.Group>
-
                     <Form.Group controlId="stocks">
                         <Form.Label>Stocks</Form.Label>
                         <Form.Control 
@@ -114,10 +109,7 @@ export default function Admin() {
                             <Button variant="primary" onClick={() => viewProducts()} >View Products</Button>
                         </Row>
                     </Col>                    
-
                 </Form>
-
-                
             </Col>
         </Row>
     )

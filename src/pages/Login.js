@@ -117,12 +117,10 @@ export default function Login() {
 
     return (
 
-        (user.id !== null) ?
-        <Navigate to="/" />
-        :
+        (user.id == null) ?
         <div className="form-container">
         <Row>
-            <Col>
+            <Col className="form-col">
                 <h2 id="login">Login</h2>
                 <Form className="login-form" onSubmit={(e) => authenticate(e)}>
                     <Form.Group controlId="userEmail">
@@ -134,12 +132,10 @@ export default function Login() {
                             onChange = {e => setEmail(e.target.value)} 
                             required
                         />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
+
                     </Form.Group>
 
-                    <Form.Group controlId="password">
+                    <Form.Group className="mt-3" controlId="password">
                         <Form.Label>Password</Form.Label>
                         <Form.Control 
                             type="password" 
@@ -167,6 +163,14 @@ export default function Login() {
             </Col>
         </Row>
         </div>
+        :
+        (user.isAdmin == false) ?
+        <Navigate to="/" />
+        :
+        <Navigate to="/admin" />
+
+        
+    
         
     )
 

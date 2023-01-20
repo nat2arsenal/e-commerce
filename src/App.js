@@ -11,8 +11,14 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-// import Error from './pages/Error';
+import Error from './pages/Error';
 import AdminPage from './pages/AdminPage';
+import Admin from './pages/Admin';
+import Products from './pages/Products';
+import Orders from './pages/Orders';
+import Users from './pages/Users';
+
+
 
 export default function App() {
 
@@ -54,24 +60,20 @@ export default function App() {
   return (
     <>
     <UserProvider value={{user, setUser, unsetUser}}>
-    <div className="nav-bar">
-      <h2>Diari ibutang ang navbar</h2>
-    </div>
-    <div className="page">
       <Router>
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/admin" element={<AdminPage/>} />
+          <Route path="/adminPage" element={<AdminPage/>} />
           <Route path="/logout" element={<Logout/>} />
-
+          <Route path="/*" element={<Error/>} />
+          <Route path="/admin" element={<Admin/>} />
+          <Route path="/admin/products" element={<Products/>} />
+          <Route path="/admin/orders" element={<Orders/>} />
+          <Route path="/admin/users" element={<Users/>} />
         </Routes>
       </Router>
-    </div>
-    <div className="footer">
-      <h2>Diari ibutang ang footer</h2>
-    </div>
     </UserProvider>
     </>
   );
