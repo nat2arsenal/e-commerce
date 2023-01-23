@@ -164,7 +164,7 @@ export default function Login() {
         </Row>
         </div>
         :
-        (user.isAdmin == false) ?
+        (user.isAdmin === false) ?
         <Navigate to="/" />
         :
         <Navigate to="/admin" />

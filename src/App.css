@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+/*.App{
+  max-height: 500px;
+  max-width: 500px;
+}*/
+
 .nav-bar{
   min-height: 5vh;
   background: white;
@@ -18,11 +23,10 @@
   text-align: center;
 }
 
-.home-space {
+.home-page {
   display: flex;
-  min-height: 80vh;
-  align-items: center;
-  justify-content: center;
+  min-height: 100vh;
+  flex-wrap: wrap;
   background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 }
 
@@ -63,10 +67,13 @@
   width: 100vw;
 }
 
+/*Sidebar*/
 .Sidebar {
   height: 100%;
+  /*max-height: 2000%;*/
   width: 20%;
   background-color: #2F4050;
+  position: sticky;
 }
 
 .SidebarList {
@@ -105,10 +112,28 @@
 .row #icon {
   flex: 30%;
   display: grid;
-  border-style: none;
+  /*border-style: none;*/
   /*place-items: center;*/
 }
 
+
+/*.accordion, .accordion-header {
+  width: 100%;
+  height: 100%;
+  border-style: none;
+  background-color: #2F4050;
+}
+
+.accordion-item {
+  background-color: #2F4050;
+}
+
+.accordion-button.collapsed, .accordion-button {
+  color: white;
+  background-color: #2F4050;
+  border-style: none;
+}
+*/
 .Orders, .ProductsPage, .Users {
   height: 100vh;
   width: 100vw;
@@ -116,34 +141,14 @@
   flex-direction: row;
 }
 
-/*.row #icon{
-  background-color: #2F4050;
-}*/
-
-/*.SidebarList .row #dropdown-basic {
-  cursor: pointer;
-  background-color: #2F4050;
+.ProductsPage .products-tabs {
+  position: absolute;
+  left: 25%;
+  /*display: inline-block;*/
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  border-style: none;
+  flex-wrap: wrap;
 }
 
-.SidebarList .row #dropdown-basic:hover {
-  cursor: pointer;
-  background-color: #293846;
-}
-
-.SidebarList .row #dropdown-icon {
-  cursor: pointer;
-  background-color: #2F4050;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  border-style: none;
-}
-
-.SidebarList .row #dropdown-icon:hover {
- cursor: pointer;
- background-color: #293846;
+/*.ProductsPage .Sidebar {
+  display: inline-block;
 }*/

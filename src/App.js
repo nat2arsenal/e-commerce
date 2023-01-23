@@ -1,18 +1,23 @@
 import './App.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 // import {Container} from 'react-bootstrap';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 import {useState, useEffect} from 'react';
 
 import {UserProvider} from './UserContext';
+
+import AppNavbar from './components/AppNavbar';
 
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Error from './pages/Error';
-import AdminPage from './pages/AdminPage';
+// import AddProduct from './pages/AddProduct';
 import Admin from './pages/Admin';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
@@ -58,24 +63,27 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <div className="App">
     <UserProvider value={{user, setUser, unsetUser}}>
       <Router>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/adminPage" element={<AdminPage/>} />
-          <Route path="/logout" element={<Logout/>} />
-          <Route path="/*" element={<Error/>} />
-          <Route path="/admin" element={<Admin/>} />
-          <Route path="/admin/products" element={<Products/>} />
-          <Route path="/admin/orders" element={<Orders/>} />
-          <Route path="/admin/users" element={<Users/>} />
-        </Routes>
+        <AppNavbar />
+        {/*<Container>*/}
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/login" element={<Login/>} />
+            {/*<Route path="/adminPage" element={<AdminPage/>} />*/}
+            <Route path="/logout" element={<Logout/>} />
+            <Route path="/*" element={<Error/>} />
+            <Route path="/admin" element={<Admin/>} />
+            <Route path="/admin/products" element={<Products/>} />
+            <Route path="/admin/orders" element={<Orders/>} />
+            <Route path="/admin/users" element={<Users/>} />
+          </Routes>
+        {/*</Container>*/}
       </Router>
     </UserProvider>
-    </>
+    </div>
   );
 }
 

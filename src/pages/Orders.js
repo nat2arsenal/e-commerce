@@ -1,6 +1,6 @@
 import '../App.css';
 import Sidebar from '../components/Sidebar';
-import {Row, Col} from 'react-bootstrap';
+// import {Row, Col} from 'react-bootstrap';
 
 export default function Orders() {
 

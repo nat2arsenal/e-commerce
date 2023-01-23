@@ -3,29 +3,31 @@ import '../App.css';
 
 
 import { Row, Col } from 'react-bootstrap';
-import Dropdown from 'react-bootstrap/Dropdown';
+// import Dropdown from 'react-bootstrap/Dropdown';
+// import Accordion from 'react-bootstrap/Accordion';
 import HomeIcon from '@mui/icons-material/Home';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PeopleIcon from '@mui/icons-material/People';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import LogoutIcon from '@mui/icons-material/Logout';
+import {NavLink} from 'react-router-dom';
 
 export default function Sidebar() {
 
 	return (
 		<div className="Sidebar">
 			<Col className="SidebarList">
-				<Row className="row" onClick={() => {window.location.pathname = "/admin"}}>
+				<Row className="row" as={NavLink} to="/admin">
 					<div id="icon">
 						{<HomeIcon/>}
 					</div>
 					<div id="title">
-						{"Home"}
+						{"Dashboard"}
 					</div> 
 				</Row>
 			</Col>
 			<Col className="SidebarList">
-				<Row className="row" onClick={() => {window.location.pathname = "/admin/products"}}>
+				<Row className="row" as={NavLink} to="/admin/products">
 					<div id="icon">
 						{<InventoryIcon/>}
 					</div>
@@ -35,7 +37,7 @@ export default function Sidebar() {
 				</Row>
 			</Col>
 			<Col className="SidebarList">
-				<Row className="row" onClick={() => {window.location.pathname = "/admin/orders"}}>
+				<Row className="row" as={NavLink} to="/admin/orders">
 					<div id="icon">
 						{<ReorderIcon/>}
 					</div>
@@ -45,7 +47,7 @@ export default function Sidebar() {
 				</Row>
 			</Col>
 			<Col className="SidebarList">
-				<Row className="row" onClick={() => {window.location.pathname = "/admin/users"}}>
+				<Row className="row" as={NavLink} to="/admin/users">
 					<div id="icon">
 						{<PeopleIcon/>}
 					</div>
@@ -54,55 +56,17 @@ export default function Sidebar() {
 					</div> 
 				</Row>
 			</Col>
+			
 			<Col className="SidebarList">
-				<Row className="row" onClick={() => {window.location.pathname = "/logout"}}>
+				<Row className="row" as={NavLink} to="/logout">
 					<div id="icon">
 						{<LogoutIcon/>}
 					</div>
 					<div id="title">
 						{"Logout"}
-					</div> 
+					</div>
 				</Row>
 			</Col>
-{/*			<Col className="SidebarList">
-				<Row className="row">
-					<Dropdown>
-				      <Dropdown.Toggle id="dropdown-basic">
-				      		<div id="dropdown-icon">
-				      			{<LogoutIcon/>}
-				      			{"Logout"}
-				      		</div>
-				      </Dropdown.Toggle>
-
-				      <Dropdown.Menu>
-				        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-				        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-				        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-				      </Dropdown.Menu>
-				    </Dropdown>
-				</Row>
-			</Col>*/}
-		{/*	<ul className="SidebarList">
-				{SidebarData.map((data) => {
-					return (
-						<li 
-							key={data.title}
-							className="row"
-							id={window.location.pathname == data.link ? "active" : ""}
-							onClick={() => {window.location.pathname = data.link}}> 
-							<div id="icon">
-								{data.icon}
-							</div>
-							<div id="title">
-								{data.title}
-							</div> 
-							
-						</li>
-					)
-				})}
-
-			</ul>*/}
-
 		</div>
 	)
 }

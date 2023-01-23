@@ -3,7 +3,7 @@
 import {Row, Col, Button, Form} from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
-import { useState, useEffect,useContext } from 'react';
+import { useState} from 'react';
 
 
 export default function Admin() {
@@ -50,13 +50,13 @@ export default function Admin() {
         })
     }
 
-    const viewProducts = () => {
-        fetch(`${process.env.REACT_APP_API_URL}/products/all`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        })
-    }
+    // const viewProducts = () => {
+    //     fetch(`${process.env.REACT_APP_API_URL}/products/all`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //     })
+    // }
 
     return (
         <Row>
@@ -104,9 +104,7 @@ export default function Admin() {
                     </Form.Group>
                     <Col>
                         <Row>
-                            <Button className="mb-3" variant="primary" onClick={() => addProduct()} >Add</Button>
-
-                            <Button variant="primary" onClick={() => viewProducts()} >View Products</Button>
+                            <Button className="mt-3" variant="primary" onClick={() => addProduct()} >Add</Button>
                         </Row>
                     </Col>                    
                 </Form>

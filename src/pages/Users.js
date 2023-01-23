@@ -1,5 +1,5 @@
 import '../App.css';
-import {Row, Col} from 'react-bootstrap';
+// import {Row, Col} from 'react-bootstrap';
 import Sidebar from '../components/Sidebar';
 
 export default function Users() {

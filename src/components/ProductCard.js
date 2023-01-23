@@ -1,7 +1,7 @@
-import {useState, useEffect} from 'react';
-import {Button, Card} from 'react-bootstrap';
+// import {useState, useEffect} from 'react';
+import {Card} from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 export default function ProductCard({product}) {
 
