@@ -1,12 +1,79 @@
-// import {useState, useEffect} from 'react';
-import {Card} from 'react-bootstrap';
+import {useState, useEffect} from 'react';
+import {Card, Button} from 'react-bootstrap';
 import PropTypes from 'prop-types';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function ProductCard({product}) {
 
-  const {productName, description, price, stocks} = product;
+  const {productName, description, price, stocks, isActive, _id} = product;
+
+  const [active, setActive] = useState(isActive);  
+
+  useEffect(() => {
+    setActive(isActive)
+  }, [isActive]);
+
+  const activate = (isActive, productId) => {
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/activate`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+
+        console.log(data)
+
+        if(data !== false) {
+          Swal.fire({
+              title: "Successfull",
+              icon: "success",
+              text: "Successfully activated product."
+          })
+        } else {
+          Swal.fire({
+            title: "Something went wrong",
+            icon: "error",
+            text: "Product activation failed."
+          })
+        }
+      })
+  };
+
+  const archive = (isActive, productId) => {
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/archive`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+
+        console.log(data)
+
+        if(data !== false) {
+          Swal.fire({
+              title: "Successfull",
+              icon: "success",
+              text: "Successfully deactivated product."
+          })
+        } else {
+          Swal.fire({
+            title: "Something went wrong",
+            icon: "error",
+            text: "Product deactivation failed."
+          })
+        }
+      })
+  };
+
   return (
+
     <Card>
       <Card.Body>
         <Card.Title>{productName}</Card.Title>
@@ -16,7 +83,19 @@ export default function ProductCard({product}) {
         <Card.Text>PhP {price}</Card.Text>
         <Card.Subtitle>Stocks:</Card.Subtitle>
         <Card.Text>{stocks}</Card.Text>
+        <Card.Subtitle>isActive?</Card.Subtitle>
+        <Card.Text>{`${isActive}`}</Card.Text>
+        <div>
+        {active === true ?
+          <Button className="bg-danger" onClick={() => archive(active, _id)}>Deactivate</Button>
+          :
+          <Button className="bg-primary" onClick={() => activate(active, _id)}>  Activate  </Button>
+        }
+        {/*<Button className="bg-primary" >Update</Button>*/}
+        <Button className="bg-primary" as={Link} to={`/admin/products/update/${_id}`} >Update</Button>
+        </div>
         {/*<Button className="bg-primary" as={Link} to={`/courses/${_id}`} >Update</Button>*/}
+        
 
       </Card.Body>
     </Card>

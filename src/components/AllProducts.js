@@ -11,6 +11,7 @@ export default function ActiveProducts() {
 	  .then(res => res.json())
 	  .then(data => {
 	    setProducts(data.map(product => {
+	    	
 	      return (
 	        <ProductCard key={product._id} product={product} />
 	      )

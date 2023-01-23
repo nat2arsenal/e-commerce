@@ -17,11 +17,11 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Error from './pages/Error';
-// import AddProduct from './pages/AddProduct';
 import Admin from './pages/Admin';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Users from './pages/Users';
+import UpdateProduct from './pages/UpdateProduct';
 
 
 
@@ -72,11 +72,11 @@ export default function App() {
             <Route path="/" element={<Home/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
-            {/*<Route path="/adminPage" element={<AdminPage/>} />*/}
             <Route path="/logout" element={<Logout/>} />
             <Route path="/*" element={<Error/>} />
             <Route path="/admin" element={<Admin/>} />
             <Route path="/admin/products" element={<Products/>} />
+            <Route path="/admin/products/update/:productId" element={<UpdateProduct/>} />
             <Route path="/admin/orders" element={<Orders/>} />
             <Route path="/admin/users" element={<Users/>} />
           </Routes>

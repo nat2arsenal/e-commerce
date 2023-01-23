@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { useState} from 'react';
 
 
-export default function Admin() {
+export default function PostProduct() {
 
     const [productName, setProductName] = useState("");
     const [description, setDescription] = useState("");
