@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+import '../App.css';
+
 export default function ProductCard({product}) {
 
   const {productName, description, price, stocks, isActive, _id} = product;
@@ -74,7 +76,7 @@ export default function ProductCard({product}) {
 
   return (
 
-    <Card>
+    <Card className="all-product-card">
       <Card.Body>
         <Card.Title>{productName}</Card.Title>
         <Card.Subtitle>Description:</Card.Subtitle>
@@ -85,15 +87,17 @@ export default function ProductCard({product}) {
         <Card.Text>{stocks}</Card.Text>
         <Card.Subtitle>isActive?</Card.Subtitle>
         <Card.Text>{`${isActive}`}</Card.Text>
-        <div>
+        {/*<div className="productcard-btn">*/}
+        <Card.Subtitle>
         {active === true ?
-          <Button className="bg-danger" onClick={() => archive(active, _id)}>Deactivate</Button>
+          <Button className="btn bg-danger" onClick={() => archive(active, _id)}>Deactivate</Button>
           :
-          <Button className="bg-primary" onClick={() => activate(active, _id)}>  Activate  </Button>
+          <Button className="btn bg-primary" onClick={() => activate(active, _id)}>Activate</Button>
         }
-        {/*<Button className="bg-primary" >Update</Button>*/}
-        <Button className="bg-primary" as={Link} to={`/admin/products/update/${_id}`} >Update</Button>
-        </div>
+        {" "}
+        <Button className="btn bg-primary" as={Link} to={`/admin/products/update/${_id}`} >Update</Button>
+        </Card.Subtitle>
+        {/*</div>*/}
         {/*<Button className="bg-primary" as={Link} to={`/courses/${_id}`} >Update</Button>*/}
         
 

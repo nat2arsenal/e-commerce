@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar';
 import AddProduct from './AddProduct';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import ActiveProducts from '../components/ActiveProducts';
+// import ActiveProducts from '../components/ActiveProducts';
 import AllProducts from '../components/AllProducts';
 
 // import UserContext from '../UserContext';
@@ -47,9 +47,9 @@ export default function Products() {
 
 
   return (
-    <div className="ProductsPage">      
+    <div className="ProductsPage">    
       <Sidebar/>
-      <div className="products-tabs">   
+      <div className="products-div">   
         <Tabs
           defaultActiveKey="profile"
           id="uncontrolled-tab-example"
@@ -57,10 +57,10 @@ export default function Products() {
           <Tab eventKey="all-products" title="All Products" className="tab1-space">
             <AllProducts />
           </Tab>
-          <Tab eventKey="active-products" title="Active Products">
+          {/*<Tab eventKey="active-products" title="Active Products">
             <ActiveProducts />
-          </Tab>
-          <Tab eventKey="add-product" title="Add Product">
+          </Tab>*/}
+          <Tab eventKey="create-product" title="Create Product" className="tab2">
             {<AddProduct/>}
           </Tab>
           {/*<Tab eventKey="contact" title="Contact" disabled>

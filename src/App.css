@@ -6,29 +6,194 @@
   box-sizing: border-box;
 }
 
-/*.App{
-  max-height: 500px;
-  max-width: 500px;
-}*/
-
-.nav-bar{
-  min-height: 5vh;
-  background: white;
-  text-align: center;
-}
-
-.footer{
-  min-height: 15vh;
-  background: white;
-  text-align: center;
-}
-
-.home-page {
+.App{
   display: flex;
-  min-height: 100vh;
-  flex-wrap: wrap;
-  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  flex-direction: column;
 }
+
+                            /*--------PAGES------------*/
+
+.home-page{
+  display: flex;
+  flex-direction: column;
+  height: 95vh;
+  width: 100%;
+  margin-top: 5vh;
+  background: linear-gradient(-45deg, #48C9B0, #17A589 , #28B463, #2874A6);
+  align-items: center;
+  justify-content: center;
+}
+
+.home-page > h5 > .navlink {
+  color: #1B4F72;
+}
+
+.shop-page{
+  display: flex;
+  height: 95vh;
+  width: 100%;
+  margin-top: 5vh;
+  flex-wrap: wrap;
+  background: linear-gradient(-45deg, #48C9B0, #17A589 , #28B463, #2874A6);
+}
+
+/*--------checkout----------*/
+.checkout-page {
+   margin-top: 10vh;
+   justify-content: center;
+   align-items: center;
+   
+}
+
+.product, .address {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-quantity {
+  width: 10%;
+}
+
+/*--------------end of checkout---------*/
+
+/*----------ADMIN PAGES---------------*/
+.Admin, .OrdersPage, .UsersPage, .ProductsPage {
+  background-color: white;
+  height: 95vh;
+  width: 100%;
+  margin-top: 5vh;
+  display: flex;
+}
+
+/*----------ADMIN PRODUCTS PAGE-------------*/
+
+.ProductsPage .products-div {
+  position: absolute;
+  left: 22%;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.tab2{
+  width: 50%
+}
+
+/*----------END OF ADMIN PRODUCTS PAGE-------------*/
+
+/*----------ADMIN ORDERS PAGE-------------*/
+
+.OrdersPage .orders-div {
+  position: absolute;
+  left: 22%;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/*----------END OF ADMIN ORDERS PAGE-------------*/
+
+/*----------ADMIN USERS PAGE-------------*/
+
+.UsersPage .users-div {
+  position: absolute;
+  left: 22%;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/*----------END OF ADMIN USERS PAGE-------------*/
+
+                            /*------END OF PAGES-------*/
+
+
+                            /*-------COMPONENTS--------*/
+
+/*------------------NAVBAR-----------------*/
+
+#navbar{
+  height: 5vh;
+  background: white;
+  text-align: center;
+  position: fixed;
+}
+
+
+/*------------------END OF NAVBAR-----------------*/
+
+/*------------------SIDEBAR-----------------*/
+.Sidebar {
+  height: 100%;
+  /*max-height: 2000%;*/
+  width: 20%;
+  background-color: #2F4050;
+  position: fixed;
+}
+
+.Sidebar > .SidebarList {
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.Sidebar > .SidebarList > .sidebar-row-link {
+  height: 5rem;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.Sidebar > .SidebarList > .sidebar-row-link:hover {
+  cursor: pointer;
+  background-color: #293846;
+}
+
+.Sidebar > .SidebarList > .sidebar-row-link > #sidebar-title {
+  flex: 70%;
+  display: grid;
+  place-items: left;
+}
+
+.Sidebar > .SidebarList >.sidebar-row-link > #sidebar-icon {
+  flex: 30%;
+  display: grid;
+  justify-content: center;
+}
+
+/*----------------END OF SIDEBAR---------------*/
+
+/*----------------ACTIVE PRODUCT CARD----------*/
+
+.active-product-card, .all-product-card {
+  width: 20%;
+  height: auto;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  margin-left: 4%;
+  margin-right: 0%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+}
+
+.active-product-card:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+/*-----------END OF ACTIVE PRODUCT CARD-----------*/
+
+                            /*----END OF COMPONENTS----*/
+
+
 
 .form-container, .login-form, .register-form {
   display: flex;
@@ -36,8 +201,9 @@
 }
 
 .form-container  {
+  margin-top: 5vh;
    padding: 2rem;
-   background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+   background: linear-gradient(-45deg, #48C9B0, #17A589 , #28B463, #2874A6);
    position: relative;
    /*border-radius: 1em;*/
    /*box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);*/
@@ -60,95 +226,3 @@
   text-align: center;
 }
 
-
-.Admin {
-  background-color: white;
-  height: 100vh;
-  width: 100vw;
-}
-
-/*Sidebar*/
-.Sidebar {
-  height: 100%;
-  /*max-height: 2000%;*/
-  width: 20%;
-  background-color: #2F4050;
-  position: sticky;
-}
-
-.SidebarList {
-  height: auto;
-  padding: 0;
-  width: 100%;
-}
-
-.SidebarList .row {
-  height: 5rem;
-  width: 100%;
-  list-style-type: none;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
-
-.SidebarList .row:hover {
-  cursor: pointer;
-  background-color: #293846;
-}
-
-.SidebarList #active {
-  background-color: #293846;
-}
-
-.row #title {
-  flex: 70%;
-  display: grid;
-  place-items: left;
-}
-
-.row #icon {
-  flex: 30%;
-  display: grid;
-  /*border-style: none;*/
-  /*place-items: center;*/
-}
-
-
-/*.accordion, .accordion-header {
-  width: 100%;
-  height: 100%;
-  border-style: none;
-  background-color: #2F4050;
-}
-
-.accordion-item {
-  background-color: #2F4050;
-}
-
-.accordion-button.collapsed, .accordion-button {
-  color: white;
-  background-color: #2F4050;
-  border-style: none;
-}
-*/
-.Orders, .ProductsPage, .Users {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-}
-
-.ProductsPage .products-tabs {
-  position: absolute;
-  left: 25%;
-  /*display: inline-block;*/
-  width: 100%;
-  flex-wrap: wrap;
-}
-
-/*.ProductsPage .Sidebar {
-  display: inline-block;
-}*/

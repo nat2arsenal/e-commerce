@@ -1,6 +1,6 @@
 // import Container from 'react-bootstrap/Container';
 import {Nav, Navbar} from 'react-bootstrap';
-
+import '../App.css';
 // import Navbar from 'react-bootstrap/Navbar';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 
@@ -20,29 +20,22 @@ export default function AppNavbar() {
   console.log(user);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" id="navbar">
       {/*<Container>*/}
-        <Navbar.Brand as={Link} to="/">Zuitt</Navbar.Brand>
+        <Navbar.Brand as={Link} to={(user.id !== null) ?"/shop":"/"}>OneProduct Shop</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-
-            {/*
-            "as" - prop that allows components to be treated as if they are a different component gaining access to its properties and functionalities
-
-            "to" -prop that is used in place of "href" for providing URL for the page
-
-            */}
-            <Nav.Link as={NavLink} to="/">Home</Nav.Link>
-            <Nav.Link as={NavLink} to="/orders">My Orders</Nav.Link>
-
+          <Nav className="navbar-buttons">
             {(user.id !== null) ?
+              <>
+              {/*<Nav.Link as={NavLink} to="/users/:userId/orders">My Orders</Nav.Link>*/}
               <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
+              </>
               :
               <>
               <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
               <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
-            </>
+              </>
             }
           </Nav>
         </Navbar.Collapse>

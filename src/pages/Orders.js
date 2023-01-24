@@ -5,9 +5,11 @@ import Sidebar from '../components/Sidebar';
 export default function Orders() {
 
   return (
-    <div className="Orders">
-          <Sidebar/>     
-          <h1>Orders</h1>
+    <div className="OrdersPage">   
+          <Sidebar/>
+          <div className="orders-div">   
+            <h1>Orders</h1>
+          </div>
     </div>
   )
 }

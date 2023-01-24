@@ -22,6 +22,10 @@ export default function Admin() {
 
 		<div className="Admin">
 			<Sidebar/>
+			{/*<div>
+				<h1> Dashboard</h1>
+				<h4> pages/Admin.js</h4>
+			</div>*/}
 		</div>
 		// :
 		// <Navigate to="/" />

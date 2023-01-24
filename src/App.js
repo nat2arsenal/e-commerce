@@ -1,7 +1,7 @@
 import './App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import {Container} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import {Link} from 'react-router-dom';
@@ -12,7 +12,7 @@ import {UserProvider} from './UserContext';
 
 import AppNavbar from './components/AppNavbar';
 
-import Home from './pages/Home';
+import Shop from './pages/Shop';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
@@ -22,6 +22,8 @@ import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Users from './pages/Users';
 import UpdateProduct from './pages/UpdateProduct';
+import Checkout from './pages/Checkout';
+import Home from './pages/Home';
 
 
 
@@ -67,20 +69,23 @@ export default function App() {
     <UserProvider value={{user, setUser, unsetUser}}>
       <Router>
         <AppNavbar />
-        {/*<Container>*/}
+        <Container fluid>
           <Routes>
+            {/*<Route path="/users/:userId/checkout" element={<Checkout/>} />*/}
+            <Route path="/checkout/:productId" element={<Checkout/>} />
             <Route path="/" element={<Home/>} />
+            <Route path="/shop" element={<Shop/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/logout" element={<Logout/>} />
             <Route path="/*" element={<Error/>} />
-            <Route path="/admin" element={<Admin/>} />
+            <Route path="/admin/dashboard" element={<Admin/>} />
             <Route path="/admin/products" element={<Products/>} />
             <Route path="/admin/products/update/:productId" element={<UpdateProduct/>} />
             <Route path="/admin/orders" element={<Orders/>} />
             <Route path="/admin/users" element={<Users/>} />
           </Routes>
-        {/*</Container>*/}
+        </Container>
       </Router>
     </UserProvider>
     </div>

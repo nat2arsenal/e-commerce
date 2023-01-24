@@ -129,7 +129,7 @@ export default function Register() {
 
     return (
         (user.id !== null) ? // S54 ACTIVITY
-        <Navigate to ="/" /> // S54 ACTIVITY
+        <Navigate to ="/shop" /> // S54 ACTIVITY
         : // S54 ACTIVITY
         <div className="form-container">
         <Col xs={12} md={4}>

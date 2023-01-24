@@ -165,9 +165,9 @@ export default function Login() {
         </div>
         :
         (user.isAdmin === false) ?
-        <Navigate to="/" />
+        <Navigate to="/shop" />
         :
-        <Navigate to="/admin" />
+        <Navigate to="/admin/dashboard" />
 
         
     

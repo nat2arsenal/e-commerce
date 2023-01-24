@@ -17,56 +17,57 @@ export default function Sidebar() {
 	return (
 		<div className="Sidebar">
 			<Col className="SidebarList">
-				<Row className="row" as={NavLink} to="/admin">
-					<div id="icon">
+				<Row className="sidebar-row-link" as={NavLink} to="/admin/dashboard">
+					<div id="sidebar-icon">
 						{<HomeIcon/>}
 					</div>
-					<div id="title">
+					<div id="sidebar-title">
 						{"Dashboard"}
 					</div> 
 				</Row>
 			</Col>
 			<Col className="SidebarList">
-				<Row className="row" as={NavLink} to="/admin/products">
-					<div id="icon">
+				<Row className="sidebar-row-link" as={NavLink} to="/admin/products">
+					<div id="sidebar-icon">
 						{<InventoryIcon/>}
 					</div>
-					<div id="title">
+					<div id="sidebar-title">
 						{"Products"}
 					</div> 
 				</Row>
 			</Col>
 			<Col className="SidebarList">
-				<Row className="row" as={NavLink} to="/admin/orders">
-					<div id="icon">
+				<Row className="sidebar-row-link" as={NavLink} to="/admin/orders">
+					<div id="sidebar-icon">
 						{<ReorderIcon/>}
 					</div>
-					<div id="title">
+					<div id="sidebar-title">
 						{"Orders"}
 					</div> 
 				</Row>
 			</Col>
 			<Col className="SidebarList">
-				<Row className="row" as={NavLink} to="/admin/users">
-					<div id="icon">
+				<Row className="sidebar-row-link" as={NavLink} to="/admin/users">
+					<div id="sidebar-icon">
 						{<PeopleIcon/>}
 					</div>
-					<div id="title">
+					<div id="sidebar-title">
 						{"Users"}
 					</div> 
 				</Row>
 			</Col>
 			
 			<Col className="SidebarList">
-				<Row className="row" as={NavLink} to="/logout">
-					<div id="icon">
+				<Row className="sidebar-row-link" as={NavLink} to="/logout">
+					<div id="sidebar-icon">
 						{<LogoutIcon/>}
 					</div>
-					<div id="title">
+					<div id="sidebar-title" >
 						{"Logout"}
 					</div>
 				</Row>
 			</Col>
+			
 		</div>
 	)
 }

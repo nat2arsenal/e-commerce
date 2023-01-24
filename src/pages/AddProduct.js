@@ -1,6 +1,6 @@
 
 
-import {Row, Col, Button, Form} from 'react-bootstrap';
+import {Row, Col, Button, Form, Container} from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
 import { useState} from 'react';
@@ -47,6 +47,11 @@ export default function PostProduct() {
                   text: "Please try again."
                 })
             }
+
+            setProductName("");
+            setDescription("");
+            setPrice(0);
+            setStocks(0);
         })
     }
 
@@ -59,8 +64,9 @@ export default function PostProduct() {
     // }
 
     return (
+        <Container>
         <Row>
-        	<Col className="p-5 text-center">
+        	<Col  className="add-product-page">
                 <Form>
                     <Form.Group controlId="productName">
                         <Form.Label>Product Name</Form.Label>
@@ -83,7 +89,7 @@ export default function PostProduct() {
                         />
                     </Form.Group>
                     <Form.Group controlId="price">
-                        <Form.Label>Price</Form.Label>
+                        <Form.Label>Price (Php)</Form.Label>
                         <Form.Control 
                             type="number" 
                             placeholder="Price"
@@ -104,11 +110,12 @@ export default function PostProduct() {
                     </Form.Group>
                     <Col>
                         <Row>
-                            <Button className="mt-3" variant="primary" onClick={() => addProduct()} >Add</Button>
+                            <Button className="mt-3" variant="primary" onClick={() => addProduct()} >Create</Button>
                         </Row>
                     </Col>                    
                 </Form>
             </Col>
         </Row>
+        </Container>
     )
 };
