@@ -15,7 +15,7 @@ export default function UpdateProduct() {
 		fetch(`${process.env.REACT_APP_API_URL}/users/details/${userId}`)
 		.then(res => res.json())
 		.then(data => {
-			console.log(data);
+			
 			setFirstName(data.firstName);
 			setLastName(data.lastName);
 			setEmail(data.email);

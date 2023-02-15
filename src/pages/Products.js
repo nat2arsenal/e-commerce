@@ -8,7 +8,7 @@ import AllProducts from '../components/AllProducts';
 export default function Products() {
 
   return (
-    <div className="ProductsPage">    
+    <div className="products-page">    
       <div className="Sidebar">
           <Sidebar/>
       </div>

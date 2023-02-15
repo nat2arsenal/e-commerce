@@ -20,9 +20,9 @@ export default function Admin() {
 	return (
 		// (user.isAdmin == true) ?
 
-		<div className="Admin">
-			<div className="Sidebar">
-					<Sidebar/>
+		<div className="admin">
+			<div className="sidebar">
+				<Sidebar/>
 			</div>
 			<div className="users-div">    
 				<h1>Admin Dashboard</h1>

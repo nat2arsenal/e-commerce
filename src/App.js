@@ -34,7 +34,10 @@ export default function App() {
   const [user, setUser] = useState({
     id: null,
     isAdmin:null,
-    firstName: null
+    firstName: null,
+    lastName: null,
+    email: null,
+    mobileNumber: null
   });
 
   const unsetUser = () => {
@@ -55,7 +58,10 @@ export default function App() {
               setUser({
                   id: data._id,
                   isAdmin: data.isAdmin,
-                  firstName: data.firstName
+                  firstName: data.firstName,
+                  lastName: data.lastName,
+                  email: data.email,
+                  mobileNumber: data.mobileNumber
               })
           } 
           // user is logged out
@@ -63,7 +69,10 @@ export default function App() {
               setUser({
                   id: null,
                   isAdmin: null,
-                  firstName: null
+                  firstName: null,
+                  lastName: null,
+                  email: null,
+                  mobileNumber: null
               })
           }
       })
@@ -75,7 +84,7 @@ export default function App() {
     <UserProvider value={{user, setUser, unsetUser}}>
       <Router>
         <div className="App">
-          <header>
+          <header className="sticky-top">
             <AppNavbar />
           </header>
           <main className="mt-3">
@@ -100,7 +109,7 @@ export default function App() {
             </Container>
           </main>
           <footer>
-            <div className="text-center">For educational purposes only.</div>
+            <div className="text-center"><strong><em>For educational purposes only.</em></strong></div>
           </footer>
         </div>
       </Router>   

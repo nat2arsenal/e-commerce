@@ -36,7 +36,6 @@ export default function Login() {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data.access);
 
             if(typeof data.access !== "undefined") {
                 localStorage.setItem('token', data.access);
@@ -67,10 +66,14 @@ export default function Login() {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             setUser({
                 id: data._id,
-                isAdmin: data.isAdmin
+                isAdmin: data.isAdmin,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                mobileNumber: data.mobileNumber
             })
         })
     };
@@ -94,7 +97,6 @@ export default function Login() {
                     <Form.Control 
                         type="email" 
                         placeholder="Enter email" 
-                        value = {email}
                         onChange = {e => setEmail(e.target.value)}
                         required
                     />
@@ -104,7 +106,6 @@ export default function Login() {
                     <Form.Control 
                         type="password" 
                         placeholder="Password"
-                        value = {password}
                         onChange = {e => setPassword(e.target.value)} 
                         required
                     />

@@ -11,7 +11,7 @@ import UserContext from '../UserContext';
 export default function AppNavbar() {
 
   const {user} = useContext(UserContext);
-  console.log(user.id);
+ 
   return (
     <Navbar bg="dark" expand="lg" id="navbar" variant="dark">
       <Container>
