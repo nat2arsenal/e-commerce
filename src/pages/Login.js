@@ -2,7 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 
 import {useState, useEffect, useContext} from 'react';
 
-import {useNavigate, Link} from 'react-router-dom';
+import {useNavigate, Link, Navigate} from 'react-router-dom';
 
 import UserContext from '../UserContext';
 
@@ -47,6 +47,7 @@ export default function Login() {
                 })
                 setEmail("");
                 setPassword("");
+                navigate("/shop");
             } else {
                 Swal.fire({
                     title: "Authentication Failed",
@@ -129,8 +130,10 @@ export default function Login() {
         </div>
         :
         (user.isAdmin === false) ?
-        navigate("/shop")
+        // navigate("/shop");
+        <Navigate to="/shop"/>
         :
-        navigate("/admin/dashboard")
+        <Navigate to="/admin/dashboard"/>
+        // navigate("/admin/dashboard")
     )
 }

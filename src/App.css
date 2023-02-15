@@ -20,6 +20,11 @@ main {
   text-align: center;
 }
 
+/*#basic-navbar-nav {
+  display: flex;
+  justify-content: flex-end;
+}*/
+
 .container {
   display: flex;
   justify-content: center;
