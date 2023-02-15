@@ -75,8 +75,9 @@ export default function ProductCard({product}) {
   };
 
   return (
-
-    <Card className="all-product-card">
+    <>
+    {/*<div className="all-product-card">*/}
+    <Card>
       <Card.Body>
         <Card.Title>{productName}</Card.Title>
         <Card.Subtitle>Description:</Card.Subtitle>
@@ -90,7 +91,7 @@ export default function ProductCard({product}) {
         {/*<div className="productcard-btn">*/}
         <Card.Subtitle>
         {active === true ?
-          <Button className="btn bg-danger" onClick={() => archive(active, _id)}>Deactivate</Button>
+          <Button className="btn bg-danger" onClick={() => archive(active, _id)}>Archive</Button>
           :
           <Button className="btn bg-primary" onClick={() => activate(active, _id)}>Activate</Button>
         }
@@ -99,10 +100,10 @@ export default function ProductCard({product}) {
         </Card.Subtitle>
         {/*</div>*/}
         {/*<Button className="bg-primary" as={Link} to={`/courses/${_id}`} >Update</Button>*/}
-        
-
       </Card.Body>
     </Card>
+    {/*</div>*/}
+    </>
   );
 }
 

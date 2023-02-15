@@ -20,7 +20,7 @@ export default function Checkout() {
 	const [stocks, setStocks] = useState(0);
 	const [quantity, setQuantity] = useState(1);
 	const [totalPrice, setTotalPrice] = useState(`${price}`);
-	// const [quantity2, setQuantity2] = useState(1);
+	const [image, setImage] = useState('');
 
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`)
@@ -30,6 +30,7 @@ export default function Checkout() {
 			setProductName(data.productName);
 			setPrice(data.price);
 			setStocks(data.stocks);
+			setImage(data.image);
 		})
 	}, [productId])
 
@@ -87,34 +88,24 @@ export default function Checkout() {
 	  })
 	}
 
-	// const updateStocks = () => {
-
-	// 	fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/info/stocks/subtract`, {
-	// 		method: "PATCH",
-	// 		headers: {
-	// 		  'Content-Type': 'application/json'
-	// 		},
-	// 		body: JSON.stringify({
-	// 		  "stocks" : quantity
-	// 		})
-	// 	})
-	// 	.then(res => res.json())
-	// 	.then(data => {
-	// 		console.log(data);
-
-	// 	})
-	// }
-
-
 	return (
 		<Container className="checkout-page">
 		<div>
 			<Row className="product-row">
-				<Col>
+				<Col md={6}>
+					<img
+			            className="img-large"
+			            src={image}
+			            alt={productName}
+		          	>
+		         	</img>
+				</Col>
+				<Col md={6}>
 					<Card>
 						<Card.Body className="product">
 							<Card.Subtitle className="mb-3">Product Name: <span>{`${productName}`}</span></Card.Subtitle>
 							<Card.Subtitle className="mb-3">Price: <span>{`${price}`}</span></Card.Subtitle>
+							<Card.Subtitle className="mb-3">Stocks: <span>{`${stocks}`}</span></Card.Subtitle>
 							<Card.Subtitle>
 								Quantity:
 								<Form className="product-quantity mt-3">
@@ -140,17 +131,6 @@ export default function Checkout() {
 						</Card.Body>
 					</Card>
 				</Col>
-				{/*<Col>
-					<Card>
-						<Card.Body className="address">
-							<Card.Subtitle>Specific Address<span>address</span></Card.Subtitle>
-							<Card.Subtitle>City<span>city</span></Card.Subtitle>
-							<Card.Subtitle>Mobile Number<span>number</span></Card.Subtitle>
-							<Card.Subtitle>Instructions</Card.Subtitle>
-							<Card.Text>instructions</Card.Text>
-						</Card.Body>
-					</Card>
-				</Col>*/}
 			</Row>
 			<Row className="product-row">
 				<Button className="checkout-btn mt-3" onClick={() => checkout(user.id, productId)}>Checkout (Total: Php {`${totalPrice}`})</Button>

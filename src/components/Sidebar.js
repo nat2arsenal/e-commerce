@@ -15,7 +15,7 @@ import {NavLink} from 'react-router-dom';
 export default function Sidebar() {
 
 	return (
-		<div className="Sidebar">
+		<>
 			<Col className="SidebarList">
 				<Row className="sidebar-row-link" as={NavLink} to="/admin/dashboard">
 					<div id="sidebar-icon">
@@ -68,6 +68,6 @@ export default function Sidebar() {
 				</Row>
 			</Col>
 			
-		</div>
+		</>
 	)
 }

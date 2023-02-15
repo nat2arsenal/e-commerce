@@ -21,7 +21,12 @@ export default function Admin() {
 		// (user.isAdmin == true) ?
 
 		<div className="Admin">
-			<Sidebar/>
+			<div className="Sidebar">
+					<Sidebar/>
+			</div>
+			<div className="users-div">    
+				<h1>Admin Dashboard</h1>
+			</div>
 			{/*<div>
 				<h1> Dashboard</h1>
 				<h4> pages/Admin.js</h4>

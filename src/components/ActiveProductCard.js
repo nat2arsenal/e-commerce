@@ -1,67 +1,16 @@
 import {Button, Card} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 // import {Link} from 'react-router-dom';
-// import UserContext from '../UserContext';
-// import {useContext } from 'react';
-// import Swal from 'sweetalert2';
-// import Checkout from '../pages/Checkout';
 import {NavLink} from 'react-router-dom';
 
 export default function ActiveProductCard({product}) {
-  // const {user} = useContext(UserContext);
+
   
-  const {productName, description, price, stocks, _id} = product;
-
-  // const [userId, setUserId] = useState("");
-  // const [productId, setProductId] = useState("");
-
-  // function checkout(userId, productId){
-    
-  //   fetch(`${process.env.REACT_APP_API_URL}/users/${userId}/checkout`, {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //        Authorization: `Bearer ${localStorage.getItem('token')}`
-  //     },
-  //     body: JSON.stringify({
-  //       "orderProducts" : [  
-  //              {
-  //                  "productId" : `${productId}`,
-  //                  "quantity" : 1
-  //              }
-  //          ]
-  //     })
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data)
-
-  //     if(data === "isAdmin"){
-  //         Swal.fire({
-  //           title: "Error",
-  //           icon: "error",
-  //           text: "Admins can't access this feature."
-  //       })
-  //     } else if (data === false) {
-  //         Swal.fire({
-  //           title: "Something went wrong",
-  //           icon: "error",
-  //           text: "Please try again."
-  //         }) 
-  //     } else if (data !== null) {
-  //       Swal.fire({
-  //         title: "Successfully ordered",
-  //         icon: "success",
-  //         text: "You have successfully ordered."
-  //       })
-  //     }
-
-  //   })
-  // }
-
+  const {productName, image, description, price, stocks, _id} = product;
 
   return (
-    <Card className="active-product-card">
+    <Card>
+      <img src={image} className="card-img-top" alt={product.name} />  
       <Card.Body>
         <Card.Title>{productName}</Card.Title>
         <Card.Subtitle>Description:</Card.Subtitle>

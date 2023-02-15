@@ -24,6 +24,8 @@ import Users from './pages/Users';
 import UpdateProduct from './pages/UpdateProduct';
 import Checkout from './pages/Checkout';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
+import OrderHistory from './pages/OrderHistory';
 
 
 
@@ -31,7 +33,8 @@ export default function App() {
 
   const [user, setUser] = useState({
     id: null,
-    isAdmin:null
+    isAdmin:null,
+    firstName: null
   });
 
   const unsetUser = () => {
@@ -51,44 +54,58 @@ export default function App() {
 
               setUser({
                   id: data._id,
-                  isAdmin: data.isAdmin
+                  isAdmin: data.isAdmin,
+                  firstName: data.firstName
               })
           } 
           // user is logged out
           else { 
               setUser({
                   id: null,
-                  isAdmin: null
+                  isAdmin: null,
+                  firstName: null
               })
           }
       })
   }, []);
 
+
   return (
-    <div className="App">
+    
     <UserProvider value={{user, setUser, unsetUser}}>
       <Router>
-        <AppNavbar />
-        <Container fluid>
-          <Routes>
-            {/*<Route path="/users/:userId/checkout" element={<Checkout/>} />*/}
-            <Route path="/checkout/:productId" element={<Checkout/>} />
-            <Route path="/" element={<Home/>} />
-            <Route path="/shop" element={<Shop/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/logout" element={<Logout/>} />
-            <Route path="/*" element={<Error/>} />
-            <Route path="/admin/dashboard" element={<Admin/>} />
-            <Route path="/admin/products" element={<Products/>} />
-            <Route path="/admin/products/update/:productId" element={<UpdateProduct/>} />
-            <Route path="/admin/orders" element={<Orders/>} />
-            <Route path="/admin/users" element={<Users/>} />
-          </Routes>
-        </Container>
-      </Router>
+        <div className="App">
+          <header>
+            <AppNavbar />
+          </header>
+          <main className="mt-3">
+            <Container>
+              <Routes>
+                {/*<Route path="/users/:userId/checkout" element={<Checkout/>} />*/}
+                <Route path="/checkout/:productId" element={<Checkout/>} />
+                <Route path="/" element={<Home/>} />
+                <Route path="/shop" element={<Shop/>} />
+                <Route path="/register" element={<Register/>} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/logout" element={<Logout/>} />
+                <Route path="/*" element={<Error/>} />
+                <Route path="/admin/dashboard" element={<Admin/>} />
+                <Route path="/admin/products" element={<Products/>} />
+                <Route path="/admin/products/update/:productId" element={<UpdateProduct/>} />
+                <Route path="/admin/orders" element={<Orders/>} />
+                <Route path="/admin/users" element={<Users/>} />
+                <Route path="/users/:userId" element={<Profile/>} />
+                <Route path="/users/:userId/orders" element={<OrderHistory/>} />
+              </Routes>
+            </Container>
+          </main>
+          <footer>
+            <div className="text-center">For educational purposes only.</div>
+          </footer>
+        </div>
+      </Router>   
     </UserProvider>
-    </div>
+    
   );
 }
 
