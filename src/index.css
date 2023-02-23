@@ -39,7 +39,8 @@ main {
 }
 
 .img-large {
-  max-width: 100%;
+  min-width: 80%;
+  max-width: 90%;
 }
 
 .img-thumbnail {
@@ -70,11 +71,11 @@ main {
 }
 
 /* searchbox */
-.btn-primary,
+/* .btn-primary,
 .btn-outline-primary {
   background-color: #f0c040;
   color: #000000;
-}
+} */
 
 /* sidebar */
 .navbar-brand {
@@ -84,7 +85,9 @@ main {
 .side-navbar {
   width: 240px;
   height: 100%;
-  position: absolute;
+  /* my code (previously position: absolute) */
+  position: fixed;
+  /*end of my code  */
   left: -300px;
   background-color: #100901;
   transition: 0.5s;
@@ -100,4 +103,71 @@ main {
 
 .active-nav {
   left: 0;
+}
+
+/* my css */
+@media (max-width: 415px) {
+  .active-cont {
+    margin-left: 100px;
+  }
+
+  .side-navbar {
+    width: 100px;
+  }
+}
+
+@media (max-width: 821px) {
+  .active-cont {
+    margin-left: 150px;
+  }
+
+  .side-navbar {
+    width: 150px;
+  }
+}
+
+.pe-1 {
+  padding-right: 1rem;
+}
+
+.shop-name:hover {
+  cursor: pointer;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
+.product-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shop-link {
+  background-color: #0d6efd;
+  display: inline-block;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.shop-link:hover {
+  background-color: #404040;
+}
+
+.shop-link h5 {
+  color: white;
+}
+.sidebar-category {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.sidebar-category:hover {
+  background-color: #212529;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: fixed;
 }

@@ -45,7 +45,7 @@ export default function PlaceOrderScreen() {
       dispatch({ type: 'CREATE_REQUEST' });
 
       const { data } = await axios.post(
-        '/api/orders',
+        '/api/orders/placeorder',
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
@@ -64,7 +64,9 @@ export default function PlaceOrderScreen() {
       ctxDispatch({ type: 'CART_CLEAR' });
       dispatch({ type: 'CREATE_SUCCESS' });
       localStorage.removeItem('cartItems');
+      toast.success(data.message);
       navigate(`/order/${data.order._id}`);
+      // console.log(data.order.shippingAddress.mobileNumber);
     } catch (err) {
       dispatch({ type: 'CREATE_FAIL' });
       toast.error(getError(err));

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useReducer, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
-import { LinkContainer } from 'react-router-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -34,15 +34,15 @@ const reducer = (state, action) => {
 
 const prices = [
   {
-    name: '$1 to $50',
+    name: '\u20B11 to \u20B150',
     value: '1-50',
   },
   {
-    name: '$51 to $200',
+    name: '\u20B151 to \u20B1200',
     value: '51-200',
   },
   {
-    name: '$201 to $1000',
+    name: '\u20B1201 to \u20B11000',
     value: '201-1000',
   },
 ];
@@ -131,13 +131,17 @@ export default function SearchScreen() {
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Department</h3>
+          <h3>Category</h3>
           <div>
             <ul>
               <li>
                 <Link
-                  className={'all' === category ? 'text-bold' : ''}
-                  to={getFilterUrl({ category: 'all' })}
+                  className={
+                    'all' === category
+                      ? 'text-bold no-decoration'
+                      : 'no-decoration'
+                  }
+                  to={getFilterUrl({ category: 'all', page: 1 })}
                 >
                   Any
                 </Link>
@@ -145,8 +149,12 @@ export default function SearchScreen() {
               {categories.map((c) => (
                 <li key={c}>
                   <Link
-                    className={c === category ? 'text-bold' : ''}
-                    to={getFilterUrl({ category: c })}
+                    className={
+                      c === category
+                        ? 'text-bold no-decoration'
+                        : 'no-decoration'
+                    }
+                    to={getFilterUrl({ category: c, page: 1 })}
                   >
                     {c}
                   </Link>
@@ -159,7 +167,11 @@ export default function SearchScreen() {
             <ul>
               <li>
                 <Link
-                  className={'all' === price ? 'text-bold' : ''}
+                  className={
+                    'all' === price
+                      ? 'text-bold no-decoration'
+                      : 'no-decoration'
+                  }
                   to={getFilterUrl({ price: 'all' })}
                 >
                   Any
@@ -168,7 +180,11 @@ export default function SearchScreen() {
               {prices.map((p) => (
                 <li key={p.value}>
                   <Link
-                    className={p.value === price ? 'text-bold' : ''}
+                    className={
+                      p.value === price
+                        ? 'text-bold no-decoration'
+                        : 'no-decoration'
+                    }
                     to={getFilterUrl({ price: p.value })}
                   >
                     {p.name}
@@ -178,12 +194,16 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Avg. Customer Reviews</h3>
+            <h3>Avg. Customer Rating</h3>
             <ul>
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
-                    className={`${r.rating}` === `${rating}` ? 'text-bold' : ''}
+                    className={
+                      `${r.rating}` === `${rating}`
+                        ? 'text-bold no-decoration'
+                        : 'no-decoration'
+                    }
                     to={getFilterUrl({ rating: r.rating })}
                   >
                     <Rating caption={' & up'} rating={r.rating}></Rating>
@@ -192,7 +212,11 @@ export default function SearchScreen() {
               ))}
               <li>
                 <Link
-                  className={rating === 'all' ? 'text-bold' : ''}
+                  className={
+                    rating === 'all'
+                      ? 'text-bold no-decoration'
+                      : 'no-decoration'
+                  }
                   to={getFilterUrl({ rating: 'all' })}
                 >
                   <Rating caption={' & up'} rating={0}></Rating>
@@ -245,7 +269,7 @@ export default function SearchScreen() {
                 </Col>
               </Row>
               {products.length === 0 && (
-                <MessageBox>No Product Found</MessageBox>
+                <MessageBox>No Product/s Found</MessageBox>
               )}
               <Row>
                 {products.map((product) => (
@@ -257,21 +281,23 @@ export default function SearchScreen() {
 
               <div>
                 {[...Array(pages).keys()].map((x) => (
-                  <LinkContainer
-                    key={x + 1}
-                    className="mx-1"
-                    to={{
-                      pathname: '/search',
-                      search: getFilterUrl({ page: x + 1 }, true),
-                    }}
-                  >
-                    <Button
-                      className={Number(page) === x + 1 ? 'text-bold' : ''}
-                      variant="light"
-                    >
+                  <Link key={x + 1} to={getFilterUrl({ page: `${x + 1}` })}>
+                    <Button variant={Number(page) === x + 1 ? 'dark' : 'light'}>
                       {x + 1}
                     </Button>
-                  </LinkContainer>
+                  </Link>
+                  // <LinkContainer
+                  //   key={x + 1}
+                  //   className="mx-1"
+                  //   to={{
+                  //     pathname: '/search',
+                  //     search: getFilterUrl({ page: x + 1 }, true),
+                  //   }}
+                  // >
+                  //   <Button variant={Number(page) === x + 1 ? 'dark' : 'light'}>
+                  //     {x + 1}
+                  //   </Button>
+                  // </LinkContainer>
                 ))}
               </div>
             </>

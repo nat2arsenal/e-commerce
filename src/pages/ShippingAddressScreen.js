@@ -19,6 +19,11 @@ export default function ShippingAddressScreen() {
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ''
   );
+  const [mobileNumber, setMobileNumber] = useState(
+    shippingAddress.mobileNumber || ''
+  );
+
+  // console.log(shippingAddress.mobileNumber);
 
   useEffect(() => {
     if (!userInfo) {
@@ -35,6 +40,7 @@ export default function ShippingAddressScreen() {
         address,
         city,
         postalCode,
+        mobileNumber,
       },
     });
     localStorage.setItem(
@@ -44,6 +50,7 @@ export default function ShippingAddressScreen() {
         address,
         city,
         postalCode,
+        mobileNumber,
       })
     );
     navigate('/payment');
@@ -53,7 +60,6 @@ export default function ShippingAddressScreen() {
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
-
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="container small-container">
         <h1 className="my-3">Shipping Address</h1>
@@ -87,6 +93,16 @@ export default function ShippingAddressScreen() {
             <Form.Control
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
+              maxLength={4}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="postalCode">
+            <Form.Label>Mobile Number</Form.Label>
+            <Form.Control
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
+              maxLength={11}
               required
             />
           </Form.Group>

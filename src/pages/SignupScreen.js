@@ -33,12 +33,16 @@ export default function SignupScreen() {
         email,
         password,
       });
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
+      if (data.message) {
+        toast.error(data.message);
+      } else {
+        ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+        navigate(redirect || '/');
+      }
       // console.log(data);
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       toast.error(getError(err));
     }
   };
@@ -89,7 +93,9 @@ export default function SignupScreen() {
           />
         </Form.Group>
         <div className="mb-3">
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit" disabled={password !== confirmPassword}>
+            Sign Up
+          </Button>
         </div>
         <div className="mb-3">
           Already have an account?{' '}

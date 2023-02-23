@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Rating from './Rating';
 import { Store } from '../Store';
 import axios from 'axios';
@@ -11,8 +11,11 @@ export default function Product(props) {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
+    userInfo,
   } = state;
 
+  // const isAdmin = userInfo.isAdmin;
+  // console.log(userInfo.isAdmin);
   const addToCartHandler = async (item) => {
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
@@ -30,22 +33,43 @@ export default function Product(props) {
   return (
     <Card>
       <Link to={`/product/${product.slug}`}>
-        <img src={product.image} className="card-img-top" alt={product.name} />
+        <OverlayTrigger
+          placement="top"
+          delay={{ show: 250, hide: 400 }}
+          overlay={<Tooltip className="tooltip">View Product</Tooltip>}
+        >
+          <img
+            src={product.image}
+            className="card-img-top"
+            alt={product.name}
+          />
+        </OverlayTrigger>
       </Link>
       <Card.Body>
-        <Link to={`/product/${product.slug}`}>
+        <Link to={`/product/${product.slug}`} className="no-decoration">
           <Card.Title>{product.name}</Card.Title>
         </Link>
+
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>${product.price}</Card.Text>
+        <Card.Text>&#8369;{product.price}</Card.Text>
         <Card.Text>Stocks: {product.countInStock}</Card.Text>
-        {product.countInStock === 0 ? (
-          <Button variant="light" disabled>
-            Out of stock
-          </Button>
-        ) : (
-          <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
-        )}
+        {
+          userInfo.isAdmin === true ? (
+            <div className="product-buttons">
+              <Button>Hi Admin!</Button> <Button>Hi Admin!</Button>
+            </div>
+          ) : product.isActive === false || product.countInStock === 0 ? (
+            <Button variant="light" disabled>
+              Out of stock
+            </Button>
+          ) : (
+            <Button onClick={() => addToCartHandler(product)}>
+              Add to cart
+            </Button>
+          )
+
+          // <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
+        }
       </Card.Body>
     </Card>
   );

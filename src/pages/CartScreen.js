@@ -40,7 +40,9 @@ export default function CartScreen() {
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
-      <h1>Shopping Cart</h1>
+      <div className="mb-4">
+        <h1>Shopping Cart</h1>
+      </div>
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
@@ -82,7 +84,7 @@ export default function CartScreen() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
+                    <Col md={3}>&#8369;{item.price}</Col>
                     <Col md={2}>
                       <Button
                         variant="light"
@@ -104,7 +106,7 @@ export default function CartScreen() {
                 <ListGroup.Item>
                   <h3>
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    items) : $
+                    items) : &#8369;
                     {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                   </h3>
                 </ListGroup.Item>
