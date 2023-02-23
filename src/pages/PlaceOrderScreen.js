@@ -7,7 +7,7 @@ import { Store } from '../Store';
 import { getError } from '../utils';
 import { toast } from 'react-toastify';
 import LoadingBox from '../components/LoadingBox';
-import axios from 'axios';
+// import axios from 'axios';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -42,36 +42,65 @@ export default function PlaceOrderScreen() {
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
-    try {
-      dispatch({ type: 'CREATE_REQUEST' });
+    dispatch({ type: 'CREATE_REQUEST' });
+    fetch(`${process.env.REACT_APP_API_URL}/api/orders/placeorder`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userInfo.token}`,
+      },
+      body: JSON.stringify({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        ctxDispatch({ type: 'CART_CLEAR' });
+        dispatch({ type: 'CREATE_SUCCESS' });
+        localStorage.removeItem('cartItems');
+        toast.success(data.message);
+        navigate(`/order/${data.order._id}`);
+      })
+      .catch((err) => {
+        dispatch({ type: 'CREATE_FAIL' });
+        toast.error(getError(err));
+      });
 
-      const { data } = await axios.post(
-        '/api/orders/placeorder',
-        {
-          orderItems: cart.cartItems,
-          shippingAddress: cart.shippingAddress,
-          paymentMethod: cart.paymentMethod,
-          itemsPrice: cart.itemsPrice,
-          shippingPrice: cart.shippingPrice,
-          taxPrice: cart.taxPrice,
-          totalPrice: cart.totalPrice,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-      ctxDispatch({ type: 'CART_CLEAR' });
-      dispatch({ type: 'CREATE_SUCCESS' });
-      localStorage.removeItem('cartItems');
-      toast.success(data.message);
-      navigate(`/order/${data.order._id}`);
-      // console.log(data.order.shippingAddress.mobileNumber);
-    } catch (err) {
-      dispatch({ type: 'CREATE_FAIL' });
-      toast.error(getError(err));
-    }
+    //   dispatch({ type: 'CREATE_REQUEST' });
+    // try {
+    //   const { data } = await axios.post(
+    //     '/api/orders/placeorder',
+    //     {
+    //       orderItems: cart.cartItems,
+    //       shippingAddress: cart.shippingAddress,
+    //       paymentMethod: cart.paymentMethod,
+    //       itemsPrice: cart.itemsPrice,
+    //       shippingPrice: cart.shippingPrice,
+    //       taxPrice: cart.taxPrice,
+    //       totalPrice: cart.totalPrice,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: `Bearer ${userInfo.token}`,
+    //       },
+    //     }
+    //   );
+    //   ctxDispatch({ type: 'CART_CLEAR' });
+    //   dispatch({ type: 'CREATE_SUCCESS' });
+    //   localStorage.removeItem('cartItems');
+    //   toast.success(data.message);
+    //   navigate(`/order/${data.order._id}`);
+    //   // console.log(data.order.shippingAddress.mobileNumber);
+    // } catch (err) {
+    //   dispatch({ type: 'CREATE_FAIL' });
+    //   toast.error(getError(err));
+    // }
   };
 
   useEffect(() => {

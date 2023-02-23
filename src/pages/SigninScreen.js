@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
@@ -21,19 +21,38 @@ export default function SigninScreen() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.post('/api/users/signin', {
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/users/signin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         email,
         password,
-      });
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
-      // console.log(data);
-    } catch (err) {
-      // console.log(err);
-      toast.error(getError(err));
-    }
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+        navigate(redirect || '/');
+      })
+      .catch((err) => toast.error(getError(err)));
+
+    // try {
+    //   const { data } = await axios.post('/api/users/signin', {
+    //     email,
+    //     password,
+    //   });
+    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+    //   localStorage.setItem('userInfo', JSON.stringify(data));
+    //   navigate(redirect || '/');
+    //   // console.log(data);
+    // } catch (err) {
+    //   // console.log(err);
+    //   toast.error(getError(err));
+    // }
   };
 
   useEffect(() => {

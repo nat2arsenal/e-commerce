@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Rating from './Rating';
 import { Store } from '../Store';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default function Product(props) {
   const { product } = props;
-
+  const [data, setData] = useState({});
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -18,7 +18,15 @@ export default function Product(props) {
   const addToCartHandler = async (item) => {
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${item._id}`);
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/products/${item._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      });
+
+    // const { data } = await axios.get(`/api/products/${item._id}`);
+
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;

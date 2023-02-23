@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Badge, Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -36,12 +36,23 @@ export default function ProductScreen() {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
-      try {
-        const result = await axios.get(`/api/products/slug/${slug}`);
-        dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
-      } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
-      }
+      fetch(`${process.env.REACT_APP_API_URL}/api/products/slug/${slug}`)
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({ type: 'FETCH_SUCCESS', payload: data });
+          // console.log(data);
+        })
+        .catch((err) => {
+          dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+        });
+
+      // dispatch({ type: 'FETCH_REQUEST' });
+      // try {
+      //   const result = await axios.get(`/api/products/slug/${slug}`);
+      //   dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
+      // } catch (err) {
+      //   dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+      // }
     };
     fetchData();
   }, [slug]);
@@ -52,17 +63,36 @@ export default function ProductScreen() {
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product._id}`);
-    if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock');
-      return;
-    }
 
-    ctxDispatch({
-      type: 'CART_ADD_ITEM',
-      payload: { ...product, quantity },
-    });
-    navigate('/cart');
+    fetch(`${process.env.REACT_APP_API_URL}/api/products/${product._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.countInStock < quantity) {
+          window.alert('Sorry. Product is out of stock');
+          return;
+        }
+        ctxDispatch({
+          type: 'CART_ADD_ITEM',
+          payload: { ...product, quantity },
+        });
+        navigate('/cart');
+      })
+      .catch((err) => {
+        getError(err);
+      });
+
+    // const { data } = await axios.get(`/api/products/${product._id}`);
+
+    // if (data.countInStock < quantity) {
+    //   window.alert('Sorry. Product is out of stock');
+    //   return;
+    // }
+
+    // ctxDispatch({
+    //   type: 'CART_ADD_ITEM',
+    //   payload: { ...product, quantity },
+    // });
+    // navigate('/cart');
   };
 
   return loading ? (

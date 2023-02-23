@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useEffect, useReducer, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
@@ -85,17 +85,32 @@ export default function SearchScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
-        );
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (err) {
-        dispatch({
-          type: 'FETCH_FAIL',
-          payload: getError(err),
+      fetch(
+        `${process.env.REACT_APP_API_URL}/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        })
+        .catch((err) => {
+          dispatch({
+            type: 'FETCH_FAIL',
+            payload: getError(err),
+          });
         });
-      }
+
+      // dispatch({ type: 'FETCH_REQUEST' });
+      // try {
+      //   const { data } = await axios.get(
+      //     `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+      //   );
+      //   dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      // } catch (err) {
+      //   dispatch({
+      //     type: 'FETCH_FAIL',
+      //     payload: getError(err),
+      //   });
+      // }
     };
     fetchData();
   }, [category, error, order, page, price, query, rating]);
@@ -104,12 +119,21 @@ export default function SearchScreen() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get(`/api/products/categories`);
-        setCategories(data);
-      } catch (err) {
-        toast.error(getError(err));
-      }
+      fetch(`${process.env.REACT_APP_API_URL}/api/products/categories`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCategories(data);
+        })
+        .catch((err) => {
+          toast.error(getError(err));
+        });
+
+      // try {
+      //   const { data } = await axios.get(`/api/products/categories`);
+      //   setCategories(data);
+      // } catch (err) {
+      //   toast.error(getError(err));
+      // }
     };
     fetchCategories();
   }, [dispatch]);

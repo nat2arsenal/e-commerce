@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Button, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
@@ -40,100 +40,201 @@ export default function ProfileScreen() {
 
   const submitNameHandler = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.patch(
-        'api/users/profile/updateName',
-        {
-          name,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      toast.success(data.message || 'Name updated successfully');
-      data.message ? setEditName(true) : <></>;
-      navigate('/profile');
-    } catch (err) {
-      toast.error(getError(err));
-    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/updateName`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userInfo.token}`,
+      },
+      body: JSON.stringify({
+        name,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+        data.message
+          ? toast.error(data.message)
+          : toast.success('Name updated successfully');
+        data.message ? setEditName(true) : <></>;
+        navigate('/profile');
+      })
+      .catch((err) => {
+        toast.error(getError(err));
+      });
+
+    // try {
+    //   const { data } = await axios.patch(
+    //     'api/users/profile/updateName',
+    //     {
+    //       name,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: `Bearer ${userInfo.token}`,
+    //       },
+    //     }
+    //   );
+    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+    //   localStorage.setItem('userInfo', JSON.stringify(data));
+    //   toast.success(data.message || 'Name updated successfully');
+    //   data.message ? setEditName(true) : <></>;
+    //   navigate('/profile');
+    // } catch (err) {
+    //   toast.error(getError(err));
+    // }
   };
 
   const submitEmailHandler = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.patch(
-        'api/users/profile/updateEmail',
-        {
-          email,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      toast.success(data.message || 'Email updated successfully');
-      data.message ? setEmail(data.email) : <></>;
-      navigate('/profile');
-    } catch (err) {
-      toast.error(getError(err));
-    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/updateEmail`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userInfo.token}`,
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+        data.message
+          ? toast.error(data.message)
+          : toast.success('Email updated successfully');
+        data.message ? setEmail(data.email) : <></>;
+        navigate('/profile');
+      })
+      .catch((err) => {
+        toast.error(getError(err));
+      });
+
+    // try {
+    //   const { data } = await axios.patch(
+    //     'api/users/profile/updateEmail',
+    //     {
+    //       email,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: `Bearer ${userInfo.token}`,
+    //       },
+    //     }
+    //   );
+    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+    //   localStorage.setItem('userInfo', JSON.stringify(data));
+    //   toast.success(data.message || 'Email updated successfully');
+    //   data.message ? setEmail(data.email) : <></>;
+    //   navigate('/profile');
+    // } catch (err) {
+    //   toast.error(getError(err));
+    // }
   };
 
   const verifyPasswordHandler = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        'api/users/profile/verifyPassword',
-        {
-          password,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-      toast.success(data.message || 'Great! Now Enter New Password.');
-      data.message ? setEditPassword(true) : setInputNewPassword(true);
-      // navigate('/profile');
-    } catch (err) {
-      toast.error(getError(err));
-    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/verifyPassword`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userInfo.token}`,
+      },
+      body: JSON.stringify({
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        data.message
+          ? toast.error(data.message)
+          : toast.success('Great! Now Enter New Password.');
+        data.message ? setEditPassword(true) : setInputNewPassword(true);
+      })
+      .catch((err) => {
+        toast.error(getError(err));
+      });
+
+    // try {
+    //   const { data } = await axios.post(
+    //     'api/users/profile/verifyPassword',
+    //     {
+    //       password,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: `Bearer ${userInfo.token}`,
+    //       },
+    //     }
+    //   );
+    //   toast.success(data.message || 'Great! Now Enter New Password.');
+    //   data.message ? setEditPassword(true) : setInputNewPassword(true);
+    //   // navigate('/profile');
+    // } catch (err) {
+    //   toast.error(getError(err));
+    // }
   };
 
   const submitNewPasswordHandler = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.patch(
-        'api/users/profile/updatePassword',
-        {
-          newPassword,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      toast.success('Password successfully updated!');
-      setInputNewPassword(false);
-      setEditPassword(false);
-      setPassword('');
-      setNewPassword('');
-      setConfirmNewPassword('');
-      navigate('/profile');
-    } catch (err) {
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/updatePassword`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userInfo.token}`,
+      },
+      body: JSON.stringify({
+        newPassword,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+        data.message
+          ? toast.error(data.message)
+          : toast.success('Password successfully updated!');
+      });
+
+    setInputNewPassword(false);
+    setEditPassword(false);
+    setPassword('');
+    setNewPassword('');
+    setConfirmNewPassword('');
+    navigate('/profile').catch((err) => {
       toast.error(getError(err));
-    }
+    });
+
+    // try {
+    //   const { data } = await axios.patch(
+    //     'api/users/profile/updatePassword',
+    //     {
+    //       newPassword,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: `Bearer ${userInfo.token}`,
+    //       },
+    //     }
+    //   );
+    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+    //   localStorage.setItem('userInfo', JSON.stringify(data));
+    //   toast.success('Password successfully updated!');
+    //   setInputNewPassword(false);
+    //   setEditPassword(false);
+    //   setPassword('');
+    //   setNewPassword('');
+    //   setConfirmNewPassword('');
+    //   navigate('/profile');
+    // } catch (err) {
+    //   toast.error(getError(err));
+    // }
   };
 
   // const submitHandler = async (e) => {
@@ -295,7 +396,7 @@ export default function ProfileScreen() {
         </Form.Group>
         <Form.Group
           className={inputNewPassword ? 'd-none' : 'mb-3'}
-          controlId="currentPassword"
+          controlId="current-password"
         >
           <div>
             {editPassword ? (
@@ -357,23 +458,25 @@ export default function ProfileScreen() {
         </Form.Group>
         <Form.Group
           className={inputNewPassword ? 'mb-3' : 'd-none'}
-          controlId="newPassword"
+          controlId="new-password"
         >
           <Form.Label>Enter New Password</Form.Label>
           <Form.Control
             className="mb-3"
             type="password"
+            value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Form.Group
           className={inputNewPassword ? 'mb-3' : 'd-none'}
-          controlId="confirmNewPassword"
+          controlId="confirm-new-password"
         >
           <Form.Label>Confirm New Password</Form.Label>
           <div className="w-100 d-flex ">
             <Form.Control
               type="password"
+              value={confirmNewPassword}
               onChange={(e) => setConfirmNewPassword(e.target.value)}
             ></Form.Control>
             <Button

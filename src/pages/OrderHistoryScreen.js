@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
@@ -34,19 +34,34 @@ export default function OrderHistoryScreen() {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
-      try {
-        const { data } = await axios.get(`/api/orders/mine`, {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
+      fetch(`${process.env.REACT_APP_API_URL}/api/orders/mine`, {
+        headers: {
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({ type: 'FETCH_SUCCESS', payload: data });
+          // console.log(data);
+        })
+        .catch((err) => {
+          dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
         });
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (error) {
-        dispatch({
-          type: 'FETCH_FAIL',
-          payload: getError(error),
-        });
-      }
+
+      // dispatch({ type: 'FETCH_REQUEST' });
+      // try {
+      //   const { data } = await axios.get(`/api/orders/mine`, {
+      //     headers: {
+      //       authorization: `Bearer ${userInfo.token}`,
+      //     },
+      //   });
+      //   dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      // } catch (error) {
+      //   dispatch({
+      //     type: 'FETCH_FAIL',
+      //     payload: getError(error),
+      //   });
+      // }
     };
     fetchData();
   }, [userInfo]);

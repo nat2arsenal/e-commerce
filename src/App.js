@@ -27,7 +27,7 @@ import OrderScreen from './pages/OrderScreen';
 import OrderHistoryScreen from './pages/OrderHistoryScreen';
 import ProfileScreen from './pages/ProfileScreen';
 import { getError } from './utils';
-import axios from 'axios';
+// import axios from 'axios';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './pages/SearchScreen';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -54,12 +54,23 @@ function App() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get('/api/products/categories');
-        setCategories(data);
-      } catch (err) {
-        toast.error(getError(err));
-      }
+      // try {
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/products/categories`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCategories(data);
+        })
+        .catch((err) => {
+          toast.error(getError(err));
+        });
+
+      // const { data } = await axios.get('/api/products/categories');
+
+      // setCategories(data);
+      // } catch (err) {
+      //   toast.error(getError(err));
+      // }
     };
     fetchCategories();
   }, []);
