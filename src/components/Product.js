@@ -11,7 +11,6 @@ export default function Product(props) {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
-    userInfo,
   } = state;
 
   // const isAdmin = userInfo.isAdmin;
@@ -54,11 +53,12 @@ export default function Product(props) {
         <Card.Text>&#8369;{product.price}</Card.Text>
         <Card.Text>Stocks: {product.countInStock}</Card.Text>
         {
-          userInfo.isAdmin === true ? (
-            <div className="product-buttons">
-              <Button>Hi Admin!</Button> <Button>Hi Admin!</Button>
-            </div>
-          ) : product.isActive === false || product.countInStock === 0 ? (
+          // userInfo.isAdmin === true ? (
+          //   <div className="product-buttons">
+          //     <Button>Hi Admin!</Button> <Button>Hi Admin!</Button>
+          //   </div>
+          // ) :
+          product.isActive === false || product.countInStock === 0 ? (
             <Button variant="light" disabled>
               Out of stock
             </Button>
