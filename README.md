@@ -4,5 +4,3 @@ An e-commerce app created by using MERN stack along with bootstrap as the CSS Fr
 
 <!-- BUILD INSTRUCTIONS -->
 
-npm install
-npm start
