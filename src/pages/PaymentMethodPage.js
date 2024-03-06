@@ -12,9 +12,7 @@ export default function PaymentMethodPage() {
     cart: { shippingAddress, paymentMethod },
   } = state;
 
-  const [paymentMethodName, setPaymentMethod] = useState(
-    paymentMethod || 'Paypal'
-  );
+  const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'Paypal');
 
   useEffect(() => {
     if (!shippingAddress.address) {
@@ -38,7 +36,7 @@ export default function PaymentMethodPage() {
         </Helmet>
         <h1 className="my-3">Payment Method</h1>
         <Form onSubmit={submitHandler}>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <Form.Check
               type="radio"
               id="Paypal"
@@ -47,7 +45,7 @@ export default function PaymentMethodPage() {
               checked={paymentMethodName === 'Paypal'}
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
-          </div>
+          </div> */}
           {/* <div className="mb-3">
             <Form.Check
               type="radio"

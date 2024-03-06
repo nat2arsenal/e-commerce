@@ -77,11 +77,10 @@ export default function SearchPage() {
   const order = sp.get('order') || 'newest';
   const page = sp.get('page') || 1;
 
-  const [{ loading, error, products, pages, countProducts }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      error: '',
-    });
+  const [{ loading, error, products, pages, countProducts }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,19 +97,6 @@ export default function SearchPage() {
             payload: getError(err),
           });
         });
-
-      // dispatch({ type: 'FETCH_REQUEST' });
-      // try {
-      //   const { data } = await axios.get(
-      //     `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
-      //   );
-      //   dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      // } catch (err) {
-      //   dispatch({
-      //     type: 'FETCH_FAIL',
-      //     payload: getError(err),
-      //   });
-      // }
     };
     fetchData();
   }, [category, error, order, page, price, query, rating]);
@@ -127,13 +113,6 @@ export default function SearchPage() {
         .catch((err) => {
           toast.error(getError(err));
         });
-
-      // try {
-      //   const { data } = await axios.get(`/api/products/categories`);
-      //   setCategories(data);
-      // } catch (err) {
-      //   toast.error(getError(err));
-      // }
     };
     fetchCategories();
   }, [dispatch]);
@@ -159,27 +138,13 @@ export default function SearchPage() {
           <div>
             <ul>
               <li>
-                <Link
-                  className={
-                    'all' === category
-                      ? 'text-bold no-decoration'
-                      : 'no-decoration'
-                  }
-                  to={getFilterUrl({ category: 'all', page: 1 })}
-                >
+                <Link className={'all' === category ? 'text-bold no-decoration' : 'no-decoration'} to={getFilterUrl({ category: 'all', page: 1 })}>
                   Any
                 </Link>
               </li>
               {categories.map((c) => (
                 <li key={c}>
-                  <Link
-                    className={
-                      c === category
-                        ? 'text-bold no-decoration'
-                        : 'no-decoration'
-                    }
-                    to={getFilterUrl({ category: c, page: 1 })}
-                  >
+                  <Link className={c === category ? 'text-bold no-decoration' : 'no-decoration'} to={getFilterUrl({ category: c, page: 1 })}>
                     {c}
                   </Link>
                 </li>
@@ -190,27 +155,13 @@ export default function SearchPage() {
             <h3>Price</h3>
             <ul>
               <li>
-                <Link
-                  className={
-                    'all' === price
-                      ? 'text-bold no-decoration'
-                      : 'no-decoration'
-                  }
-                  to={getFilterUrl({ price: 'all' })}
-                >
+                <Link className={'all' === price ? 'text-bold no-decoration' : 'no-decoration'} to={getFilterUrl({ price: 'all' })}>
                   Any
                 </Link>
               </li>
               {prices.map((p) => (
                 <li key={p.value}>
-                  <Link
-                    className={
-                      p.value === price
-                        ? 'text-bold no-decoration'
-                        : 'no-decoration'
-                    }
-                    to={getFilterUrl({ price: p.value })}
-                  >
+                  <Link className={p.value === price ? 'text-bold no-decoration' : 'no-decoration'} to={getFilterUrl({ price: p.value })}>
                     {p.name}
                   </Link>
                 </li>
@@ -223,11 +174,7 @@ export default function SearchPage() {
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
-                    className={
-                      `${r.rating}` === `${rating}`
-                        ? 'text-bold no-decoration'
-                        : 'no-decoration'
-                    }
+                    className={`${r.rating}` === `${rating}` ? 'text-bold no-decoration' : 'no-decoration'}
                     to={getFilterUrl({ rating: r.rating })}
                   >
                     <Rating caption={' & up'} rating={r.rating}></Rating>
@@ -235,14 +182,7 @@ export default function SearchPage() {
                 </li>
               ))}
               <li>
-                <Link
-                  className={
-                    rating === 'all'
-                      ? 'text-bold no-decoration'
-                      : 'no-decoration'
-                  }
-                  to={getFilterUrl({ rating: 'all' })}
-                >
+                <Link className={rating === 'all' ? 'text-bold no-decoration' : 'no-decoration'} to={getFilterUrl({ rating: 'all' })}>
                   <Rating caption={' & up'} rating={0}></Rating>
                 </Link>
               </li>
@@ -264,14 +204,8 @@ export default function SearchPage() {
                     {category !== 'all' && ' : ' + category}
                     {price !== 'all' && ' : Price ' + price}
                     {rating !== 'all' && ' : Rating ' + rating + ' & up'}
-                    {query !== 'all' ||
-                    category !== 'all' ||
-                    rating !== 'all' ||
-                    price !== 'all' ? (
-                      <Button
-                        variant="light"
-                        onClick={() => navigate('/search')}
-                      >
+                    {query !== 'all' || category !== 'all' || rating !== 'all' || price !== 'all' ? (
+                      <Button variant="light" onClick={() => navigate('/search')}>
                         <i className="fas fa-times-circle"></i>
                       </Button>
                     ) : null}
@@ -292,9 +226,7 @@ export default function SearchPage() {
                   </select>
                 </Col>
               </Row>
-              {products.length === 0 && (
-                <MessageBox>No Product/s Found</MessageBox>
-              )}
+              {products.length === 0 && <MessageBox>No Product/s Found</MessageBox>}
               <Row>
                 {products.map((product) => (
                   <Col sm={6} lg={4} className="mb-3" key={product._id}>
@@ -306,9 +238,7 @@ export default function SearchPage() {
               <div>
                 {[...Array(pages).keys()].map((x) => (
                   <Link key={x + 1} to={getFilterUrl({ page: `${x + 1}` })}>
-                    <Button variant={Number(page) === x + 1 ? 'dark' : 'light'}>
-                      {x + 1}
-                    </Button>
+                    <Button variant={Number(page) === x + 1 ? 'dark' : 'light'}>{x + 1}</Button>
                   </Link>
                   // <LinkContainer
                   //   key={x + 1}

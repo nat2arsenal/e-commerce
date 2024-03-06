@@ -47,23 +47,10 @@ export default function OrderPage() {
         .then((res) => res.json())
         .then((data) => {
           dispatch({ type: 'FETCH_SUCCESS', payload: data });
-          // console.log(data);
         })
         .catch((err) => {
           dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
         });
-
-      // try {
-      //   dispatch({ type: 'FETCH_REQUEST' });
-      //   const { data } = await axios.get(`/api/orders/${orderId}`, {
-      //     headers: {
-      //       authorization: `Bearer ${userInfo.token}`,
-      //     },
-      //   });
-      //   dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      // } catch (err) {
-      //   dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
-      // }
     };
 
     if (!userInfo) {
@@ -91,13 +78,10 @@ export default function OrderPage() {
               <Card.Title>Shipping</Card.Title>
               <Card.Text>
                 <strong>Name: </strong> {order.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {order.shippingAddress.address},
-                {order.shippingAddress.city}, {order.shippingAddress.postalCode}
+                <strong>Address: </strong> {order.shippingAddress.address},{order.shippingAddress.city}, {order.shippingAddress.postalCode}
               </Card.Text>
               {order.isDelivered ? (
-                <MessageBox variant="success">
-                  Delivered at {order.deliverAt}
-                </MessageBox>
+                <MessageBox variant="success">Delivered at {order.deliverAt}</MessageBox>
               ) : (
                 <MessageBox variant="danger">Not Delivered</MessageBox>
               )}
@@ -110,9 +94,7 @@ export default function OrderPage() {
                 <strong>Method: </strong> {order.paymentMethod}
               </Card.Text>
               {order.isPaid ? (
-                <MessageBox variant="success">
-                  Paid at {order.paidAt}
-                </MessageBox>
+                <MessageBox variant="success">Paid at {order.paidAt}</MessageBox>
               ) : (
                 <MessageBox variant="danger">Not Paid</MessageBox>
               )}
@@ -126,15 +108,11 @@ export default function OrderPage() {
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
                       <Col md={6}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid rounded img-thumbnail"
-                        ></img>{' '}
+                        <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail"></img>{' '}
                         <Link to={`/product/${item.slug}`}>{item.name}</Link>
                       </Col>
                       <Col md={3}>
-                        <span>{item.quantity}</span>
+                        <span>&nbsp;&nbsp;x&nbsp;&nbsp;{item.quantity}</span>
                       </Col>
                       <Col md={3}>&#8369;{item.price}</Col>
                     </Row>
@@ -152,7 +130,7 @@ export default function OrderPage() {
                 <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
-                      <Col>Items</Col>
+                      <Col>Items Total Price</Col>
                       <Col>&#8369;{order.itemsPrice.toFixed(2)}</Col>
                     </Row>
                   </ListGroup.Item>

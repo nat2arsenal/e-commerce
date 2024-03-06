@@ -39,20 +39,6 @@ export default function SigninPage() {
         navigate(redirect || '/');
       })
       .catch((err) => toast.error(getError(err)));
-
-    // try {
-    //   const { data } = await axios.post('/api/users/signin', {
-    //     email,
-    //     password,
-    //   });
-    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    //   localStorage.setItem('userInfo', JSON.stringify(data));
-    //   navigate(redirect || '/');
-    //   // console.log(data);
-    // } catch (err) {
-    //   // console.log(err);
-    //   toast.error(getError(err));
-    // }
   };
 
   useEffect(() => {
@@ -70,26 +56,17 @@ export default function SigninPage() {
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <Form.Control type="email" required onChange={(e) => setEmail(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <Form.Control type="password" required onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
         <div className="mb-3">
           <Button type="submit">Sign In</Button>
         </div>
         <div className="mb-3">
-          New customer?{' '}
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          New customer? <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
         </div>
       </Form>
     </Container>

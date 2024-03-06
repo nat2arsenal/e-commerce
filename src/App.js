@@ -6,14 +6,7 @@ import ProductPage from './pages/ProductPage';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
-import {
-  Badge,
-  Button,
-  Nav,
-  NavDropdown,
-  OverlayTrigger,
-  Tooltip,
-} from 'react-bootstrap';
+import { Badge, Button, Nav, NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { Shop } from './Shop';
@@ -27,7 +20,6 @@ import OrderPage from './pages/OrderPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import ProfilePage from './pages/ProfilePage';
 import { getError } from './utils';
-// import axios from 'axios';
 import SearchBox from './components/SearchBox';
 import SearchPage from './pages/SearchPage';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -54,8 +46,6 @@ function App() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      // try {
-
       await fetch(`${process.env.REACT_APP_API_URL}/api/products/categories`)
         .then((res) => res.json())
         .then((data) => {
@@ -64,55 +54,30 @@ function App() {
         .catch((err) => {
           toast.error(getError(err));
         });
-
-      // const { data } = await axios.get('/api/products/categories');
-
-      // setCategories(data);
-      // } catch (err) {
-      //   toast.error(getError(err));
-      // }
     };
     fetchCategories();
   }, []);
 
   return (
     <BrowserRouter>
-      <div
-        className={
-          sidebarIsOpen
-            ? 'd-flex flex-column site-container active-cont'
-            : 'd-flex flex-column site-container'
-        }
-      >
-        {/* <div className="d-flex flex-column site-container"> */}
+      <div className={sidebarIsOpen ? 'd-flex flex-column site-container active-cont' : 'd-flex flex-column site-container'}>
         <ToastContainer position="bottom-center" limit={1} />
         <header className="sticky-top">
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-              <Button
-                variant="dark"
-                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
-              >
+              <Button variant="dark" onClick={() => setSidebarIsOpen(!sidebarIsOpen)}>
                 <OverlayTrigger
                   placement="bottom"
                   delay={{ show: 250, hide: 400 }}
-                  overlay={
-                    <Tooltip className="tooltip">Filter by Category</Tooltip>
-                  }
+                  overlay={<Tooltip className="tooltip">Filter by Category</Tooltip>}
                 >
                   <i className="fas fa-bars"></i>
                 </OverlayTrigger>
               </Button>
 
               <Link to="/" className="no-decoration">
-                <OverlayTrigger
-                  placement="bottom"
-                  delay={{ show: 250, hide: 400 }}
-                  overlay={<Tooltip className="tooltip">Go Shopping</Tooltip>}
-                >
-                  <Navbar.Brand className="shop-name">
-                    e-commerce shop
-                  </Navbar.Brand>
+                <OverlayTrigger placement="bottom" delay={{ show: 250, hide: 400 }} overlay={<Tooltip className="tooltip">Go Shopping</Tooltip>}>
+                  <Navbar.Brand className="shop-name">e-commerce shop</Navbar.Brand>
                 </OverlayTrigger>
               </Link>
 
@@ -135,10 +100,7 @@ function App() {
                       userInfo.isAdmin ? (
                         <></>
                       ) : (
-                        <NavDropdown
-                          title={userInfo.name}
-                          id="basic-nav-dropdown"
-                        >
+                        <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                           <LinkContainer to="/profile">
                             <NavDropdown.Item>User Profile</NavDropdown.Item>
                           </LinkContainer>
@@ -146,11 +108,7 @@ function App() {
                             <NavDropdown.Item>Order History</NavDropdown.Item>
                           </LinkContainer>
                           {/* <NavDropdown.Divider /> */}
-                          <Link
-                            className="dropdown-item"
-                            to="#signout"
-                            onClick={signoutHandler}
-                          >
+                          <Link className="dropdown-item" to="#signout" onClick={signoutHandler}>
                             Sign out
                           </Link>
                         </NavDropdown>
@@ -179,11 +137,7 @@ function App() {
                         <LinkContainer to="/admin/userlist">
                           <NavDropdown.Item>Users</NavDropdown.Item>
                         </LinkContainer>
-                        <Link
-                          className="dropdown-item"
-                          to="#signout"
-                          onClick={signoutHandler}
-                        >
+                        <Link className="dropdown-item" to="#signout" onClick={signoutHandler}>
                           Sign out
                         </Link>
                       </NavDropdown>
@@ -207,10 +161,7 @@ function App() {
             </Nav.Item>
             {categories.map((category) => (
               <Nav.Item key={category} className="sidebar-category">
-                <LinkContainer
-                  to={{ pathname: '/search', search: `category=${category}` }}
-                  onClick={() => setSidebarIsOpen(false)}
-                >
+                <LinkContainer to={{ pathname: '/search', search: `category=${category}` }} onClick={() => setSidebarIsOpen(false)}>
                   <p className="my-3">{category}</p>
                 </LinkContainer>
               </Nav.Item>
@@ -288,14 +239,11 @@ function App() {
             </Routes>
           </Container>
         </main>
-        <footer>
-          <div className="text-center">
-            <strong>
-              <em>For educational purposes only.</em>
-            </strong>
-          </div>
+        <footer className="text-center my-3">
+          <strong>
+            <em>For demonstration purposes only.</em>
+          </strong>
         </footer>
-        {/* </div> */}
       </div>
     </BrowserRouter>
   );

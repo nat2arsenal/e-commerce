@@ -33,9 +33,7 @@ export default function PlaceOrderPage() {
   const { cart, userInfo } = state;
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
-  cart.itemsPrice = round2(
-    cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
-  );
+  cart.itemsPrice = round2(cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0));
   // cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
   cart.shippingPrice = cart.itemsPrice > 0 ? 100 : 0;
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
@@ -71,36 +69,6 @@ export default function PlaceOrderPage() {
         dispatch({ type: 'CREATE_FAIL' });
         toast.error(getError(err));
       });
-
-    //   dispatch({ type: 'CREATE_REQUEST' });
-    // try {
-    //   const { data } = await axios.post(
-    //     '/api/orders/placeorder',
-    //     {
-    //       orderItems: cart.cartItems,
-    //       shippingAddress: cart.shippingAddress,
-    //       paymentMethod: cart.paymentMethod,
-    //       itemsPrice: cart.itemsPrice,
-    //       shippingPrice: cart.shippingPrice,
-    //       taxPrice: cart.taxPrice,
-    //       totalPrice: cart.totalPrice,
-    //     },
-    //     {
-    //       headers: {
-    //         authorization: `Bearer ${userInfo.token}`,
-    //       },
-    //     }
-    //   );
-    //   ctxDispatch({ type: 'CART_CLEAR' });
-    //   dispatch({ type: 'CREATE_SUCCESS' });
-    //   localStorage.removeItem('cartItems');
-    //   toast.success(data.message);
-    //   navigate(`/order/${data.order._id}`);
-    //   // console.log(data.order.shippingAddress.mobileNumber);
-    // } catch (err) {
-    //   dispatch({ type: 'CREATE_FAIL' });
-    //   toast.error(getError(err));
-    // }
   };
 
   useEffect(() => {
@@ -123,8 +91,7 @@ export default function PlaceOrderPage() {
               <Card.Title>Shipping</Card.Title>
               <Card.Text>
                 <strong>Name: </strong> {cart.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {cart.shippingAddress.address},
-                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
+                <strong>Address: </strong> {cart.shippingAddress.address},{cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
               </Card.Text>
               <Link to="/shipping">Edit</Link>
             </Card.Body>
@@ -146,11 +113,7 @@ export default function PlaceOrderPage() {
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
                       <Col md={6}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid rounded img-thumbnail"
-                        ></img>{' '}
+                        <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail"></img>{' '}
                         <Link to={`/product/${item.slug}`}>{item.name}</Link>
                       </Col>
                       <Col md={3}>
@@ -200,11 +163,7 @@ export default function PlaceOrderPage() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className="d-grid">
-                    <Button
-                      type="button"
-                      onClick={placeOrderHandler}
-                      disabled={cart.cartItems.length === 0}
-                    >
+                    <Button type="button" onClick={placeOrderHandler} disabled={cart.cartItems.length === 0}>
                       Place Order
                     </Button>
                   </div>

@@ -55,36 +55,13 @@ export default function ProfilePage() {
       .then((data) => {
         ctxDispatch({ type: 'USER_SIGNIN', payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
-        data.message
-          ? toast.error(data.message)
-          : toast.success('Name updated successfully');
+        data.message ? toast.error(data.message) : toast.success('Name updated successfully');
         data.message ? setEditName(true) : <></>;
         navigate('/profile');
       })
       .catch((err) => {
         toast.error(getError(err));
       });
-
-    // try {
-    //   const { data } = await axios.patch(
-    //     'api/users/profile/updateName',
-    //     {
-    //       name,
-    //     },
-    //     {
-    //       headers: {
-    //         authorization: `Bearer ${userInfo.token}`,
-    //       },
-    //     }
-    //   );
-    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    //   localStorage.setItem('userInfo', JSON.stringify(data));
-    //   toast.success(data.message || 'Name updated successfully');
-    //   data.message ? setEditName(true) : <></>;
-    //   navigate('/profile');
-    // } catch (err) {
-    //   toast.error(getError(err));
-    // }
   };
 
   const submitEmailHandler = async (e) => {
@@ -104,36 +81,13 @@ export default function ProfilePage() {
       .then((data) => {
         ctxDispatch({ type: 'USER_SIGNIN', payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
-        data.message
-          ? toast.error(data.message)
-          : toast.success('Email updated successfully');
+        data.message ? toast.error(data.message) : toast.success('Email updated successfully');
         data.message ? setEmail(data.email) : <></>;
         navigate('/profile');
       })
       .catch((err) => {
         toast.error(getError(err));
       });
-
-    // try {
-    //   const { data } = await axios.patch(
-    //     'api/users/profile/updateEmail',
-    //     {
-    //       email,
-    //     },
-    //     {
-    //       headers: {
-    //         authorization: `Bearer ${userInfo.token}`,
-    //       },
-    //     }
-    //   );
-    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    //   localStorage.setItem('userInfo', JSON.stringify(data));
-    //   toast.success(data.message || 'Email updated successfully');
-    //   data.message ? setEmail(data.email) : <></>;
-    //   navigate('/profile');
-    // } catch (err) {
-    //   toast.error(getError(err));
-    // }
   };
 
   const verifyPasswordHandler = async (e) => {
@@ -151,33 +105,12 @@ export default function ProfilePage() {
     })
       .then((res) => res.json())
       .then((data) => {
-        data.message
-          ? toast.error(data.message)
-          : toast.success('Great! Now Enter New Password.');
+        data.message ? toast.error(data.message) : toast.success('Great! Now Enter New Password.');
         data.message ? setEditPassword(true) : setInputNewPassword(true);
       })
       .catch((err) => {
         toast.error(getError(err));
       });
-
-    // try {
-    //   const { data } = await axios.post(
-    //     'api/users/profile/verifyPassword',
-    //     {
-    //       password,
-    //     },
-    //     {
-    //       headers: {
-    //         authorization: `Bearer ${userInfo.token}`,
-    //       },
-    //     }
-    //   );
-    //   toast.success(data.message || 'Great! Now Enter New Password.');
-    //   data.message ? setEditPassword(true) : setInputNewPassword(true);
-    //   // navigate('/profile');
-    // } catch (err) {
-    //   toast.error(getError(err));
-    // }
   };
 
   const submitNewPasswordHandler = async (e) => {
@@ -197,9 +130,7 @@ export default function ProfilePage() {
       .then((data) => {
         ctxDispatch({ type: 'USER_SIGNIN', payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
-        data.message
-          ? toast.error(data.message)
-          : toast.success('Password successfully updated!');
+        data.message ? toast.error(data.message) : toast.success('Password successfully updated!');
       });
 
     setInputNewPassword(false);
@@ -210,61 +141,7 @@ export default function ProfilePage() {
     navigate('/profile').catch((err) => {
       toast.error(getError(err));
     });
-
-    // try {
-    //   const { data } = await axios.patch(
-    //     'api/users/profile/updatePassword',
-    //     {
-    //       newPassword,
-    //     },
-    //     {
-    //       headers: {
-    //         authorization: `Bearer ${userInfo.token}`,
-    //       },
-    //     }
-    //   );
-    //   ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    //   localStorage.setItem('userInfo', JSON.stringify(data));
-    //   toast.success('Password successfully updated!');
-    //   setInputNewPassword(false);
-    //   setEditPassword(false);
-    //   setPassword('');
-    //   setNewPassword('');
-    //   setConfirmNewPassword('');
-    //   navigate('/profile');
-    // } catch (err) {
-    //   toast.error(getError(err));
-    // }
   };
-
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const { data } = await axios.put(
-  //       '/api/users/profile',
-  //       {
-  //         name,
-  //         email,
-  //         password,
-  //       },
-  //       {
-  //         headers: {
-  //           authorization: `Bearer ${userInfo.token}`,
-  //         },
-  //       }
-  //     );
-  //     dispatch({ type: 'UPDATE_SUCCESS' });
-  //     ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-  //     localStorage.setItem('userInfo', JSON.stringify(data));
-  //     toast.success('User updated successfully');
-  //     navigate('/profile');
-  //   } catch (err) {
-  //     dispatch({
-  //       type: 'UPDATE_FAIL',
-  //     });
-  //     toast.error(getError(err));
-  //   }
-  // };
 
   return (
     <div className="container" id="small-container">
@@ -278,11 +155,7 @@ export default function ProfilePage() {
             <Form.Label>Name</Form.Label>
           </div>
           <div className="w-100 d-flex">
-            <OverlayTrigger
-              placement="bottom"
-              delay={{ show: 250, hide: 400 }}
-              overlay={<Tooltip className="tooltip">Current Name</Tooltip>}
-            >
+            <OverlayTrigger placement="bottom" delay={{ show: 250, hide: 400 }} overlay={<Tooltip className="tooltip">Current Name</Tooltip>}>
               <Form.Control
                 maxLength={40}
                 type="string"
@@ -297,9 +170,7 @@ export default function ProfilePage() {
               <OverlayTrigger
                 placement="bottom"
                 delay={{ show: 250, hide: 400 }}
-                overlay={
-                  <Tooltip className="tooltip">Click to Edit Name</Tooltip>
-                }
+                overlay={<Tooltip className="tooltip">Click to Edit Name</Tooltip>}
               >
                 <Button
                   className="ms-1"
@@ -316,9 +187,7 @@ export default function ProfilePage() {
               <OverlayTrigger
                 placement="bottom"
                 delay={{ show: 250, hide: 400 }}
-                overlay={
-                  <Tooltip className="tooltip">Click to Save New Name</Tooltip>
-                }
+                overlay={<Tooltip className="tooltip">Click to Save New Name</Tooltip>}
               >
                 <Button
                   className="ms-1"
@@ -340,11 +209,7 @@ export default function ProfilePage() {
             <Form.Label>Email</Form.Label>
           </div>
           <div className="w-100 d-flex">
-            <OverlayTrigger
-              placement="bottom"
-              delay={{ show: 250, hide: 400 }}
-              overlay={<Tooltip className="tooltip">Current Email</Tooltip>}
-            >
+            <OverlayTrigger placement="bottom" delay={{ show: 250, hide: 400 }} overlay={<Tooltip className="tooltip">Current Email</Tooltip>}>
               <Form.Control
                 type="email"
                 value={email}
@@ -357,9 +222,7 @@ export default function ProfilePage() {
               <OverlayTrigger
                 placement="bottom"
                 delay={{ show: 250, hide: 400 }}
-                overlay={
-                  <Tooltip className="tooltip">Click to Edit Email</Tooltip>
-                }
+                overlay={<Tooltip className="tooltip">Click to Edit Email</Tooltip>}
               >
                 <Button
                   className="ms-1"
@@ -376,9 +239,7 @@ export default function ProfilePage() {
               <OverlayTrigger
                 placement="bottom"
                 delay={{ show: 250, hide: 400 }}
-                overlay={
-                  <Tooltip className="tooltip">Click to Save Email</Tooltip>
-                }
+                overlay={<Tooltip className="tooltip">Click to Save Email</Tooltip>}
               >
                 <Button
                   className="ms-1"
@@ -394,17 +255,8 @@ export default function ProfilePage() {
             )}
           </div>
         </Form.Group>
-        <Form.Group
-          className={inputNewPassword ? 'd-none' : 'mb-3'}
-          controlId="current-password"
-        >
-          <div>
-            {editPassword ? (
-              <Form.Label>Please Enter Current Password</Form.Label>
-            ) : (
-              <Form.Label>Password</Form.Label>
-            )}
-          </div>
+        <Form.Group className={inputNewPassword ? 'd-none' : 'mb-3'} controlId="current-password">
+          <div>{editPassword ? <Form.Label>Please Enter Current Password</Form.Label> : <Form.Label>Password</Form.Label>}</div>
           <div className="w-100 d-flex ">
             <Form.Control
               type="password"
@@ -418,9 +270,7 @@ export default function ProfilePage() {
               <OverlayTrigger
                 placement="bottom"
                 delay={{ show: 250, hide: 400 }}
-                overlay={
-                  <Tooltip className="tooltip">Click to Edit Password</Tooltip>
-                }
+                overlay={<Tooltip className="tooltip">Click to Edit Password</Tooltip>}
               >
                 <Button
                   className="ms-1"
@@ -437,11 +287,7 @@ export default function ProfilePage() {
               <OverlayTrigger
                 placement="bottom"
                 delay={{ show: 250, hide: 400 }}
-                overlay={
-                  <Tooltip className="tooltip">
-                    Click to Verify Current Password
-                  </Tooltip>
-                }
+                overlay={<Tooltip className="tooltip">Click to Verify Current Password</Tooltip>}
               >
                 <Button
                   className="ms-1"
@@ -456,29 +302,14 @@ export default function ProfilePage() {
             )}
           </div>
         </Form.Group>
-        <Form.Group
-          className={inputNewPassword ? 'mb-3' : 'd-none'}
-          controlId="new-password"
-        >
+        <Form.Group className={inputNewPassword ? 'mb-3' : 'd-none'} controlId="new-password">
           <Form.Label>Enter New Password</Form.Label>
-          <Form.Control
-            className="mb-3"
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          ></Form.Control>
+          <Form.Control className="mb-3" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}></Form.Control>
         </Form.Group>
-        <Form.Group
-          className={inputNewPassword ? 'mb-3' : 'd-none'}
-          controlId="confirm-new-password"
-        >
+        <Form.Group className={inputNewPassword ? 'mb-3' : 'd-none'} controlId="confirm-new-password">
           <Form.Label>Confirm New Password</Form.Label>
           <div className="w-100 d-flex ">
-            <Form.Control
-              type="password"
-              value={confirmNewPassword}
-              onChange={(e) => setConfirmNewPassword(e.target.value)}
-            ></Form.Control>
+            <Form.Control type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)}></Form.Control>
             <Button
               className="ms-1"
               type="submit"

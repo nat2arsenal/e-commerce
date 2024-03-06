@@ -42,26 +42,10 @@ export default function OrderHistoryPage() {
         .then((res) => res.json())
         .then((data) => {
           dispatch({ type: 'FETCH_SUCCESS', payload: data });
-          // console.log(data);
         })
         .catch((err) => {
           dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
         });
-
-      // dispatch({ type: 'FETCH_REQUEST' });
-      // try {
-      //   const { data } = await axios.get(`/api/orders/mine`, {
-      //     headers: {
-      //       authorization: `Bearer ${userInfo.token}`,
-      //     },
-      //   });
-      //   dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      // } catch (error) {
-      //   dispatch({
-      //     type: 'FETCH_FAIL',
-      //     payload: getError(error),
-      //   });
-      // }
     };
     fetchData();
   }, [userInfo]);
@@ -95,11 +79,7 @@ export default function OrderHistoryPage() {
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>&#8369;{order.totalPrice.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-                <td>
-                  {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
-                    : 'No'}
-                </td>
+                <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : 'No'}</td>
                 <td>
                   <Button
                     type="button"

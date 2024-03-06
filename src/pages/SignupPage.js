@@ -51,25 +51,6 @@ export default function SignupPage() {
         }
       })
       .catch((err) => toast.error(getError(err)));
-
-    // try {
-    //   const { data } = await axios.post('/api/users/signup', {
-    //     name,
-    //     email,
-    //     password,
-    //   });
-    //   if (data.message) {
-    //     toast.error(data.message);
-    //   } else {
-    //     ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    //     localStorage.setItem('userInfo', JSON.stringify(data));
-    //     navigate(redirect || '/');
-    //   }
-    //   // console.log(data);
-    // } catch (err) {
-    //   // console.log(err);
-    //   toast.error(getError(err));
-    // }
   };
 
   useEffect(() => {
@@ -87,35 +68,19 @@ export default function SignupPage() {
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            required
-            onChange={(e) => setName(e.target.value)}
-          />
+          <Form.Control type="text" required onChange={(e) => setName(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <Form.Control type="email" required onChange={(e) => setEmail(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <Form.Control type="password" required onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+          <Form.Control type="password" required onChange={(e) => setConfirmPassword(e.target.value)} />
         </Form.Group>
         <div className="mb-3">
           <Button type="submit" disabled={password !== confirmPassword}>
@@ -123,8 +88,7 @@ export default function SignupPage() {
           </Button>
         </div>
         <div className="mb-3">
-          Already have an account?{' '}
-          <Link to={`/signin?redirect=${redirect}`}>Sign-in</Link>
+          Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign-in</Link>
         </div>
       </Form>
     </Container>

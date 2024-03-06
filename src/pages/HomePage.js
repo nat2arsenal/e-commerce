@@ -43,16 +43,6 @@ export default function HomePage() {
         .catch((err) => {
           dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
         });
-
-      // dispatch({ type: 'FETCH_REQUEST' });
-      // try {
-      //   const result = await axios.get('/api/products');
-      //   dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
-      // } catch (err) {
-      //   dispatch({ type: 'FETCH_FAIL', payload: err.message });
-      // }
-
-      // setProducts(result.data);
     };
     fetchData();
   }, []);
@@ -72,7 +62,7 @@ export default function HomePage() {
           <Row>
             {products.map((product) =>
               product.isActive === false ? null : (
-                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3 d-flex flex-column">
                   <Product product={product}></Product>
                 </Col>
               )
