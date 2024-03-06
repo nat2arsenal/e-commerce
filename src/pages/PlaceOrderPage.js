@@ -41,7 +41,7 @@ export default function PlaceOrderPage() {
 
   const placeOrderHandler = async () => {
     dispatch({ type: 'CREATE_REQUEST' });
-    fetch(`${process.env.REACT_APP_API_URL}/api/orders/placeorder`, {
+    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/orders/placeorder`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

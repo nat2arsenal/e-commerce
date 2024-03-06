@@ -19,7 +19,7 @@ export default function Product(props) {
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/products/${item._id}`)
+    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/products/${item._id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);

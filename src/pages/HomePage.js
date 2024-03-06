@@ -35,7 +35,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
-      fetch(`${process.env.REACT_APP_API_URL}/api/products`)
+      fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/products`)
         .then((res) => res.json())
         .then((data) => {
           dispatch({ type: 'FETCH_SUCCESS', payload: data });

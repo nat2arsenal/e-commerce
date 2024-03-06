@@ -41,7 +41,7 @@ export default function ProfilePage() {
   const submitNameHandler = async (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/updateName`, {
+    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/users/profile/updateName`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export default function ProfilePage() {
   const submitEmailHandler = async (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/updateEmail`, {
+    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/users/profile/updateEmail`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ export default function ProfilePage() {
   const verifyPasswordHandler = async (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/verifyPassword`, {
+    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/users/profile/verifyPassword`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ export default function ProfilePage() {
   const submitNewPasswordHandler = async (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/updatePassword`, {
+    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/users/profile/updatePassword`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

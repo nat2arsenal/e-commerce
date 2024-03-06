@@ -39,7 +39,7 @@ export default function OrderPage() {
   useEffect(() => {
     const fetchOrder = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
-      fetch(`${process.env.REACT_APP_API_URL}/api/orders/${orderId}`, {
+      fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/orders/${orderId}`, {
         headers: {
           authorization: `Bearer ${userInfo.token}`,
         },

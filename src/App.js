@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      await fetch(`${process.env.REACT_APP_API_URL}/api/products/categories`)
+      await fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/products/categories`)
         .then((res) => res.json())
         .then((data) => {
           setCategories(data);
