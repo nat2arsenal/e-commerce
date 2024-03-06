@@ -35,7 +35,7 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
-      fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/products/slug/${slug}`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/products/slug/${slug}`)
         .then((res) => res.json())
         .then((data) => {
           dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -54,7 +54,7 @@ export default function ProductPage() {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
-    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/products/${product._id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/products/${product._id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.countInStock < quantity) {

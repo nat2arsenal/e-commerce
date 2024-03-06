@@ -22,7 +22,7 @@ export default function SigninPage() {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    await fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/users/signin`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/api/users/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

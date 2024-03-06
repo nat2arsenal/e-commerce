@@ -17,7 +17,7 @@ export default function CartPage() {
   } = state;
 
   const updateCartHandler = async (item, quantity) => {
-    await fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/products/${item._id}`)
+    await fetch(`${process.env.REACT_APP_API_URL}/api/products/${item._id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);

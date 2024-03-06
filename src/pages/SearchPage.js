@@ -85,7 +85,7 @@ export default function SearchPage() {
   useEffect(() => {
     const fetchData = async () => {
       fetch(
-        `${process.env.ECOMMERCE_APP_API_URL}/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+        `${process.env.REACT_APP_API_URL}/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -105,7 +105,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/products/categories`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/products/categories`)
         .then((res) => res.json())
         .then((data) => {
           setCategories(data);

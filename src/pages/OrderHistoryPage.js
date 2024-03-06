@@ -34,7 +34,7 @@ export default function OrderHistoryPage() {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
-      fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/orders/mine`, {
+      fetch(`${process.env.REACT_APP_API_URL}/api/orders/mine`, {
         headers: {
           authorization: `Bearer ${userInfo.token}`,
         },

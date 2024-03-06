@@ -28,7 +28,7 @@ export default function SignupPage() {
     //   return;
     // }
 
-    fetch(`${process.env.ECOMMERCE_APP_API_URL}/api/users/signup`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
