@@ -34,11 +34,16 @@ export default function SigninPage() {
     })
       .then((res) => res.json())
       .then((data) => {
-        ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-        localStorage.setItem('userInfo', JSON.stringify(data));
-        navigate(redirect || '/');
+        if (data.message) {
+          toast.error(data.message);
+        } else {
+          toast.success('Welcome! You are successfully signed in.');
+          ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+          localStorage.setItem('userInfo', JSON.stringify(data));
+          navigate(redirect || '/');
+        }
       })
-      .catch((err) => toast.error(getError(err)));
+      .catch((err) => console.log(getError(err)));
   };
 
   useEffect(() => {
